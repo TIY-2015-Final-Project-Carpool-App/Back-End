@@ -7,7 +7,7 @@ class CreateChildren < ActiveRecord::Migration
       t.date :dob
       t.string :address
       t.string :phone_number
-      t.intger :height
+      t.integer :height
       t.integer :weight
 
       t.timestamps null: false
