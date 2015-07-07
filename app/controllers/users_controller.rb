@@ -52,12 +52,16 @@ class UsersController < ApplicationController
 			email: params[:email],
 			avatar: params[:avatar]
 		}
-		if @user.update(attributes)
-			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-										:last_name, :address, :phone_number, :email, :avatar]) }, status: :ok
+		if current_user.access_token == @user.access_token
+			if @user.update(attributes)
+				render json: { user: @user.as_json(only: [:id, :username, :first_name, 
+											:last_name, :address, :phone_number, :email, :avatar]) }, status: :ok
+			else
+				render json: { errors: "There was an issue with the specified field entries." }, 
+				 							status: :unproccessable_entity
+			end
 		else
-			render json: { errors: "There was an issue with the specified field entries." }, 
-			 							status: :unproccessable_entity
+			render json: { message: "Unauthorized to modify this account." }, status: :unauthorized
 		end
 	end
 
@@ -70,7 +74,7 @@ class UsersController < ApplicationController
         render json: { errors: "Invalid Request." }, status: :bad_request 
       end
 		else
-			render json: { message: "You are not authorized to delete this account!" }, status: :unauthorized
+			render json: { message: "Unauthorized to delete this account." }, status: :unauthorized
 		end
 	end
 

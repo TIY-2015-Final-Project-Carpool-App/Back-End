@@ -7,4 +7,12 @@ Rails.application.routes.draw do
   put 'user/:username', to: 'users#update'    # Updates a user's attributes
   post 'users/login', to: 'users#login'       # Login to obtain access_token
   delete 'user/:username', to: 'users#delete' # Delete a user's account
+
+  # Child Model
+  get 'user/:username/children', to: 'children#index'   # Shows all children that belong to a user
+  post 'children', to: 'children#create'                # Creates a child
+  get 'child/:id', to: 'children#show'                  # Shows one child by ID
+  put 'child/:id', to: 'children#update'                # Updates a child's atttributes
+  delete 'child/:id', to: 'children#delete'             # Deletes a child
+
 end
