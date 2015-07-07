@@ -241,6 +241,8 @@ Name | Type | Description
 username | string | User's username as specified in the database.
 password | string | User's password as specified in the database.
 
+**Status Codes**
+
 Code | Type | Description
 ---|---|---
 201 | Success | Server has processed the request and has successfully supplied the user with an access token.
@@ -280,7 +282,7 @@ Code | Type | Description
 ---|---|---
 204 | Success | Request was received and deleted successfully.
 400 | Error | Bad Request. Specified parameters do not match.
-401 | Error | Unauthorized. A different user is not authorized to delete another user's guess.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's account.
 
 **Example Response**
 
