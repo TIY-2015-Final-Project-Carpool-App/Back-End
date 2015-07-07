@@ -9,6 +9,12 @@
   * [Update](#update-a-user)
   * [Login](#user-login)
   * [Delete](#delete-a-user)
+3. [Child Model](#child-model)
+  * [Index](#children-index)
+  * [Create Child](#create-child)
+  * [Show Child](#show-a-child)
+  * [Update Child](#update-a-child)
+  * [Delete Child](#delete-a-child)
 
 ## **Pagination**
 All request methods that have pagination implemented in its use will will state "***Pagination Enabled***" in its description. If no 'page' or 'per' parameter is specified, the API will automatically apply its default. These parameters are passed in the path as a query or in the JSON request.
@@ -121,19 +127,17 @@ Code | Type | Description
 **Example Response**
 
 ```
-[
-  {
-    "id": 1,
-    "username": "LilDebbie",
-    "full_name": "Lil",
-    "last_name": "Debbie",
-    "address": "10260 McKee Road, Collegedale, TN 37315",
-    "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
-    "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29"
-  }
-]
+{
+  "id": 1,
+  "username": "LilDebbie",
+  "full_name": "Lil",
+  "last_name": "Debbie",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "email": "lil@debbie.com"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29"
+}
 ```
 
 #### Show a User
@@ -154,18 +158,16 @@ Code | Type | Description
 **Example Response**
 
 ```
-[
-  {
-    "id": 1,
-    "username": "LilDebbie",
-    "full_name": "Lil",
-    "last_name": "Debbie",
-    "address": "10260 McKee Road, Collegedale, TN 37315",
-    "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
-  }
-]
+{
+  "id": 1,
+  "username": "LilDebbie",
+  "full_name": "Lil",
+  "last_name": "Debbie",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "email": "lil@debbie.com"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+}
 ```
 
 #### Update a User
@@ -213,18 +215,16 @@ Code | Type | Description
 **Example Response**
 
 ```
-[
-  {
-    "id": 1,
-    "username": "LilDebbie",
-    "full_name": "Lil",
-    "last_name": "Teddie",
-    "address": "10260 McKee Road, Collegedale, TN 37315",
-    "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
-  }
-]
+{
+  "id": 1,
+  "username": "LilDebbie",
+  "full_name": "Lil",
+  "last_name": "Teddie",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "email": "lil@debbie.com"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+}
 ```
 
 #### User Login
@@ -275,7 +275,7 @@ Deletes a specified user's account.
 Path: 
 `DELETE '/user/:username'`
 
-**Params**
+**Parameters**
 *None*
 
 Code | Type | Description
@@ -290,6 +290,274 @@ Code | Type | Description
 No message is returned. 
 ```
 
+## **Child Model**
+
+#### Children Index
+
+List of all children that are associated with a specific user.
+
+Path:
+`GET '/user/:username/children'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All posts were successfully returned.
+400 | Error | Bad Request. Invalid parameters.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 1,
+    "first_name": "Casa",
+    "last_name": "Sanchez",
+    "age": 7,
+    "dob": "2007-12-01",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "height": 134,
+    "weight": 100,
+    "parent": {
+      "id": 1,
+      "username": "LilDebbie",
+      "full_name": "Lil",
+      "last_name": "Teddie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    }
+  },
+  {
+    "id": 2,
+    "first_name": "Lobos",
+    "last_name": "Sanchez",
+    "age": 8,
+    "dob": "2006-11-01",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "height": 124,
+    "weight": 95,
+    "parent": {
+      "id": 1,
+      "username": "LilDebbie",
+      "full_name": "Lil",
+      "last_name": "Teddie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    }
+  }
+]
+```
+
+#### Create Child
+
+Creates a child associated to a specifed user. If this is being used in conjunction with user registration form in a single view, the new user's desired username **must** be included as a parameter. If user is signed in then a username is not required as a parameter.
+
+Path:
+`POST '/children'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+username | string | **Optional.** (Required if the user is not signed in.) Unique username for a user.
+first_name | string | **Required.** Child's first name.
+last_name | string | **Required.** Child's last name.
+age | integer | Child's current age.
+dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
+address | string | Child's location to be picked up and dropped off.
+phone_number | string | Child's phone number if applicable.
+height | integer | Child's height in centimeters (cm).
+weight | integer | Child's weight in pounds (lb).
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "username": "LilDebbie",
+  "first_name": "Jac",
+  "last_name": "Nickelsen",
+  "age": 10,
+  "dob": "30/5/2005",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 1,
+  "first_name": "Jac",
+  "last_name": "Nickelsen",
+  "age": 10,
+  "dob": "2005-5-30",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "height": nil,
+  "weight": nil,
+  "parent": {
+    "id": 1,
+    "username": "LilDebbie",
+    "full_name": "Lil",
+    "last_name": "Teddie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  }
+}
+```
+
+#### Show a Child
+
+Shows the attributes of a specified child.
+
+Path:
+`GET '/child/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server successfully requested returned post data.
+400 | Error | Bad Request. Specified parameters do not match.
+
+**Example Response**
+
+```
+{
+  "id": 1,
+  "first_name": "Casa",
+  "last_name": "Sanchez",
+  "age": 7,
+  "dob": "2007-12-01",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "height": 134,
+  "weight": 100,
+  "parent": {
+    "id": 1,
+    "username": "LilDebbie",
+    "full_name": "Lil",
+    "last_name": "Teddie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  }
+}
+```
+
+#### Update a Child
+
+Updates the specified attributes of a child. Forms should include all required fields to be passed with the request.
+
+Path:
+`PUT '/child/:id'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+username | string | **Optional.** (Required if the user is not signed in.) Unique username for a user.
+first_name | string | **Required.** Child's first name.
+last_name | string | **Required.** Child's last name.
+age | integer | Child's current age.
+dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
+address | string | Child's location to be picked up and dropped off.
+phone_number | string | Child's phone number if applicable.
+height | integer | Child's height in centimeters (cm).
+weight | integer | Child's weight in pounds (lb).
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully updated the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "username": "LilDebbie",
+  "first_name": "Jac",
+  "last_name": "Nickelsen",
+  "age": 10,
+  "dob": "30/5/2005",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 1,
+  "first_name": "Jac",
+  "last_name": "Nickelsen",
+  "age": 10,
+  "dob": "2005-5-30",
+  "address": "10260 McKee Road, Collegedale, TN 37315",
+  "phone_number": "800-522-4499",
+  "height": nil,
+  "weight": nil,
+  "parent": {
+    "id": 1,
+    "username": "LilDebbie",
+    "full_name": "Lil",
+    "last_name": "Teddie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  }
+}
+```
+
+#### Delete a Child
+
+Deletes a specified child.
+
+Path: 
+`DELETE '/child/:id'`
+
+**Parameters**
+*None*
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's child.
+
+**Example Response**
+
+```
+No message is returned.
+```
 
 
 

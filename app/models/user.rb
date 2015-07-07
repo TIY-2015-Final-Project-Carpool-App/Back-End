@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_access_token
 
+  has_many :children
+
   def ensure_access_token
   	if self.access_token.blank?
   		self.access_token = User.generate_token
