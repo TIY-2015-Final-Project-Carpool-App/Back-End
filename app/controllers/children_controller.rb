@@ -20,7 +20,8 @@ class ChildrenController < ApplicationController
       address: params[:address],
       phone_number: params[:phone_number],
       height: params[:height],
-      weight: params[:weight]
+      weight: params[:weight],
+      blood_type: params[:blood_type]
     }
     if dob_format(params[:dob])
       if params[:username]
@@ -60,7 +61,8 @@ class ChildrenController < ApplicationController
       address: params[:address],
       phone_number: params[:phone_number],
       height: params[:height],
-      weight: params[:weight]
+      weight: params[:weight],
+      blood_type: params[:blood_type]
     }
     if dob_format(params[:dob])
       if current_user.access_token == @user.access_token

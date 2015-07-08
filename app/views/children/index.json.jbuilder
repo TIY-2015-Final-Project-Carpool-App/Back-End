@@ -8,6 +8,7 @@ json.array! @children do |child|
   json.phone_number child.phone_number
   json.height child.height
   json.weight child.weight
+  json.blood_type child.blood_type
   json.parent do
     json.id child.user.id
     json.username child.user.username
