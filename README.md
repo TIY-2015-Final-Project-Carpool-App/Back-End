@@ -323,6 +323,7 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": 134,
     "weight": 100,
+    "blood_type": "O",
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -344,6 +345,7 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": 124,
     "weight": 95,
+    "blood_type": "A",
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -378,6 +380,7 @@ address | string | Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in centimeters (cm).
 weight | integer | Child's weight in pounds (lb).
+blood_type | string | Child's blood type.
 
 **Status Codes**
 
@@ -413,6 +416,7 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": nil,
   "weight": nil,
+  "blood_type": nil,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -456,6 +460,7 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": 134,
   "weight": 100,
+  "blood_type": "O",
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -489,6 +494,7 @@ address | string | Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in centimeters (cm).
 weight | integer | Child's weight in pounds (lb).
+blood_type | string | Child's blood type.
 
 **Status Codes**
 
@@ -524,6 +530,7 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": nil,
   "weight": nil,
+  "blood_type": nil,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
