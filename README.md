@@ -61,7 +61,7 @@ Code | Type | Description
   {
     "id": 1,
     "username": "LilDebbie",
-    "full_name": "Lil",
+    "first_name": "Lil",
     "last_name": "Debbie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
@@ -71,7 +71,7 @@ Code | Type | Description
   {
     "id": 2,
     "username": "HostTwinkies",
-    "full_name": "Hostess",
+    "first_name": "Hostess",
     "last_name": "Twinkies",
     "address": "1010 Cake Road, Kansas City, MO",
     "phone_number": "800-876-3942",
@@ -115,7 +115,7 @@ Code | Type | Description
 {
   "username": "LilDebbie",
   "password": "secretpassword",
-  "full_name": "Lil",
+  "first_name": "Lil",
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
@@ -130,7 +130,7 @@ Code | Type | Description
 {
   "id": 1,
   "username": "LilDebbie",
-  "full_name": "Lil",
+  "first_name": "Lil",
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
@@ -161,7 +161,7 @@ Code | Type | Description
 {
   "id": 1,
   "username": "LilDebbie",
-  "full_name": "Lil",
+  "first_name": "Lil",
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
@@ -203,7 +203,7 @@ Code | Type | Description
 {
   "username": "LilDebbie",
   "password": "newsecretpassword",
-  "full_name": "Lil",
+  "first_name": "Lil",
   "last_name": "Teddie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
@@ -218,7 +218,7 @@ Code | Type | Description
 {
   "id": 1,
   "username": "LilDebbie",
-  "full_name": "Lil",
+  "first_name": "Lil",
   "last_name": "Teddie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
@@ -326,7 +326,7 @@ Code | Type | Description
     "parent": {
       "id": 1,
       "username": "LilDebbie",
-      "full_name": "Lil",
+      "first_name": "Lil",
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
@@ -347,7 +347,7 @@ Code | Type | Description
     "parent": {
       "id": 1,
       "username": "LilDebbie",
-      "full_name": "Lil",
+      "first_name": "Lil",
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
@@ -376,7 +376,7 @@ age | integer | Child's current age.
 dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
 address | string | Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
-height | integer | Child's height in centimeters (cm).
+height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).
 
 **Status Codes**
@@ -416,7 +416,7 @@ Code | Type | Description
   "parent": {
     "id": 1,
     "username": "LilDebbie",
-    "full_name": "Lil",
+    "first_name": "Lil",
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
@@ -459,7 +459,7 @@ Code | Type | Description
   "parent": {
     "id": 1,
     "username": "LilDebbie",
-    "full_name": "Lil",
+    "first_name": "Lil",
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
@@ -487,7 +487,7 @@ age | integer | Child's current age.
 dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
 address | string | Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
-height | integer | Child's height in centimeters (cm).
+height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).
 
 **Status Codes**
@@ -527,7 +527,7 @@ Code | Type | Description
   "parent": {
     "id": 1,
     "username": "LilDebbie",
-    "full_name": "Lil",
+    "first_name": "Lil",
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
@@ -557,6 +557,61 @@ Code | Type | Description
 
 ```
 No message is returned.
+```
+
+## **Medical Information Model**
+
+## Show Medical Information
+
+Shows the medical information for a specified child
+
+Path: 
+`GET '/child/:id/medical'`
+
+**Parameters**
+*None*
+
+**Status Codes*
+
+Code | Type | Description
+---|---|---
+200 | Success | All posts were successfully returned.
+204 | Success | No medical information associated with specified child.
+
+**Example Response**
+
+```
+{
+  "id": 1,
+  "child": {
+    "id": 1,
+    "first_name": "Jac",
+    "last_name": "Nickelsen",
+    "age": 10,
+    "dob": "2005-5-30",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "height": nil,
+    "weight": nil,
+    "parent": {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Teddie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    }
+  },
+  "conditions": "Diabetes, Eczema",
+  "medications": "Lantus",
+  "notes": "Use dosage and sliding scale directions provided in his backpack for if insulin administration is needed.",
+  "allergies": "None",
+  "insurance": "N/A",
+  "religious_preference": "N/A"
+}
+
 ```
 
 

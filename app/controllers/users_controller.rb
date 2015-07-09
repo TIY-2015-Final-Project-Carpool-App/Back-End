@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 										:last_name, :address, :phone_number, :email, :avatar, :access_token]) }, 
                     status: :created
 		else
-			render json: { errors: @user.errors.full_messages }, status: :unproccessable_entity
+			render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
 		end
 	end
 
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find_by(username: params[:username])
+		pass_hash = password_hash(params[:password])
 		attributes = {
 			username: params[:username],
 			password: pass_hash,
@@ -58,7 +59,7 @@ class UsersController < ApplicationController
 											:last_name, :address, :phone_number, :email, :avatar]) }, status: :ok
 			else
 				render json: { errors: "There was an issue with the specified field entries." }, 
-				 							status: :unproccessable_entity
+				 							status: :unprocessable_entity
 			end
 		else
 			render json: { message: "Unauthorized to modify this account." }, status: :unauthorized

@@ -15,4 +15,10 @@ Rails.application.routes.draw do
   put 'child/:id', to: 'children#update'                # Updates a child's atttributes
   delete 'child/:id', to: 'children#delete'             # Deletes a child
 
+  # Medical Model
+  get 'child/:id/medical', to: 'medicals#show'         # Show medical information for a child
+  post 'medical', to: 'medicals#create'                # Create medical information for a child
+  put 'child/:id/medical', to: 'medicals#update'       # Update medical information for a child
+  delete 'child/:id/medical', to: 'medicals#delete'    # Delete medical information for a child
+
 end
