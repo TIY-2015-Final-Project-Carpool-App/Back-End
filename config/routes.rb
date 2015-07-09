@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # Medical Model
   get 'child/:id/medical', to: 'medicals#show'         # Show medical information for a child
-  post 'medical', to: 'medicals#create'                # Create medical information for a child
+  post 'child/:id/medical', to: 'medicals#create'                # Create medical information for a child
   put 'child/:id/medical', to: 'medicals#update'       # Update medical information for a child
   delete 'child/:id/medical', to: 'medicals#delete'    # Delete medical information for a child
 

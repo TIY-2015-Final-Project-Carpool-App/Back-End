@@ -8,3 +8,4 @@ json.notes @medical.notes
 json.allergies @medical.allergies
 json.insurance @medical.insurance
 json.religious_preference @medical.religious_preference
+json.blood_type @medical.blood_type

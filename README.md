@@ -360,7 +360,7 @@ Code | Type | Description
 
 #### Create Child
 
-Creates a child associated to a specifed user. If this is being used in conjunction with user registration form in a single view, the new user's desired username **must** be included as a parameter. If user is signed in then a username is not required as a parameter.
+Creates a child associated to a specifed user.
 
 Path:
 `POST '/children'`
@@ -369,7 +369,6 @@ Path:
 
 Name | Type | Description
 --- | --- | ---
-username | string | **Optional.** (Required if the user is not signed in.) Unique username for a user.
 first_name | string | **Required.** Child's first name.
 last_name | string | **Required.** Child's last name.
 age | integer | Child's current age.
@@ -411,8 +410,8 @@ Code | Type | Description
   "dob": "2005-5-30",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "height": nil,
-  "weight": nil,
+  "height": null,
+  "weight": null,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -480,7 +479,6 @@ Path:
 
 Name | Type | Description
 --- | --- | ---
-username | string | **Optional.** (Required if the user is not signed in.) Unique username for a user.
 first_name | string | **Required.** Child's first name.
 last_name | string | **Required.** Child's last name.
 age | integer | Child's current age.
@@ -522,8 +520,8 @@ Code | Type | Description
   "dob": "2005-5-30",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "height": nil,
-  "weight": nil,
+  "height": null,
+  "weight": null,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -546,6 +544,8 @@ Path:
 
 **Parameters**
 *None*
+
+**Status Codes**
 
 Code | Type | Description
 ---|---|---
@@ -591,8 +591,8 @@ Code | Type | Description
     "dob": "2005-5-30",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
-    "height": nil,
-    "weight": nil,
+    "height": null,
+    "weight": null,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -609,10 +609,180 @@ Code | Type | Description
   "notes": "Use dosage and sliding scale directions provided in his backpack for if insulin administration is needed.",
   "allergies": "None",
   "insurance": "N/A",
-  "religious_preference": "N/A"
+  "religious_preference": "N/A",
+  "blood_type": "O+"
 }
-
 ```
 
+#### Create Medical Information
 
+Creates medical information for a specified child.
+
+Path:
+`POST '/child/:id/medical'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+conditions | string | A child's medical conditions.
+medications | string | Prescribed medications for the specified child.
+notes | string | Any relevant medical information such as medication directions or special needs.
+allergies | string | A child's allergies.
+insurance | string | A child's medical insurance information.
+religious_preference | string | A child's religious affiliation if medically relevant.
+blood_type | string | A child's blood type.
+
+**Status Code**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "conditions": "Diabetes, Eczema",
+  "medications": "Lantus",
+  "notes": "Use dosage and sliding scale directions provided in his backpack for if insulin administration is needed.",
+  "allergies": "None",
+  "insurance": "N/A",
+  "religious_preference": "N/A",
+  "blood_type": "O+"
+}
+```
+
+**Example Response**
+
+```
+  "id": 1,
+  "child": {
+    "id": 1,
+    "first_name": "Jac",
+    "last_name": "Nickelsen",
+    "age": 10,
+    "dob": "2005-5-30",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "height": null,
+    "weight": null,
+    "parent": {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Teddie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    }
+  },
+  "conditions": "Diabetes, Eczema",
+  "medications": "Lantus",
+  "notes": "Use dosage and sliding scale directions provided in his backpack for if insulin administration is needed.",
+  "allergies": "None",
+  "insurance": "N/A",
+  "religious_preference": "N/A",
+  "blood_type": "O+"
+}
+```
+
+#### Update Medical Information
+
+Updates the medical information of a child. Forms should still include all previous information even if they are not updated with the new parameters.
+
+Path:
+`PUT '/child/:id/medical'`
+
+**Parmeters**
+
+Name | Type | Description
+--- | --- | ---
+conditions | string | A child's medical conditions.
+medications | string | Prescribed medications for the specified child.
+notes | string | Any relevant medical information such as medication directions or special needs.
+allergies | string | A child's allergies.
+insurance | string | A child's medical insurance information.
+religious_preference | string | A child's religious affiliation if medically relevant.
+blood_type | string | A child's blood type.
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully updated the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "conditions": "Eczema",
+  "allergies": "Peanuts",
+  "insurance": "N/A",
+  "religious_preference": "N/A",
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 1,
+  "child": {
+    "id": 1,
+    "first_name": "Jac",
+    "last_name": "Nickelsen",
+    "age": 10,
+    "dob": "2005-5-30",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "height": null,
+    "weight": null,
+    "parent": {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Teddie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    }
+  },
+  "conditions": "Eczema",
+  "medications": null,
+  "notes": null,
+  "allergies": "Peanuts",
+  "insurance": "N/A",
+  "religious_preference": "N/A",
+  "blood_type": null
+}
+```
+
+#### Delete Medical Information
+
+Deletes the medical information for a specified child.
+
+Path:
+`DELETE '/child/:id/medical'`
+
+**Parameters*
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's child.
+
+**Example Response**
+
+```
+No message is returned.
+```
 
