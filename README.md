@@ -15,6 +15,11 @@
   * [Show Child](#show-a-child)
   * [Update Child](#update-a-child)
   * [Delete Child](#delete-a-child)
+4. [Medical Information Model](#medical-information-model)
+  * [Show Medical Information](#show-medical-information)
+  * [Create Medical Information](#create-medical-information)
+  * [Update Medical Information](#update-medical-information)
+  * [Delete Medical Information](#delete-medical-information)
 
 ## **Pagination**
 All request methods that have pagination implemented in its use will will state "***Pagination Enabled***" in its description. If no 'page' or 'per' parameter is specified, the API will automatically apply its default. These parameters are passed in the path as a query or in the JSON request.
@@ -566,7 +571,7 @@ No message is returned.
 
 ## **Medical Information Model**
 
-## Show Medical Information
+#### Show Medical Information
 
 Shows the medical information for a specified child
 
