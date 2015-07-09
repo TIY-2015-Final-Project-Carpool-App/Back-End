@@ -44,7 +44,6 @@ class ChildrenController < ApplicationController
       phone_number: params[:phone_number],
       height: params[:height],
       weight: params[:weight],
-      blood_type: params[:blood_type]
     }
     if dob_format(params[:dob])
       if current_user.access_token == @user.access_token
@@ -93,7 +92,6 @@ class ChildrenController < ApplicationController
       phone_number: params[:phone_number],
       height: params[:height],
       weight: params[:weight],
-      blood_type: params[:blood_type]
     }
     if params[:username]
       @user = User.find_by(username: params[:username])
