@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  child_id: 1
+  conditions: MyString
+  medications: MyString
+  notes: MyString
+
+two:
+  child_id: 1
+  conditions: MyString
+  medications: MyString
+  notes: MyString
