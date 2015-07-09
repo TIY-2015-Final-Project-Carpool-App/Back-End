@@ -581,7 +581,7 @@ Path:
 **Parameters**
 *None*
 
-**Status Codes*
+**Status Codes**
 
 Code | Type | Description
 ---|---|---
@@ -643,7 +643,7 @@ insurance | string | A child's medical insurance information.
 religious_preference | string | A child's religious affiliation if medically relevant.
 blood_type | string | A child's blood type.
 
-**Status Code**
+**Status Codes**
 
 Code | Type | Description
 ---|---|---
