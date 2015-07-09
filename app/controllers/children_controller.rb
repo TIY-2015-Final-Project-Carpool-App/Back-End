@@ -92,7 +92,8 @@ class ChildrenController < ApplicationController
       address: params[:address],
       phone_number: params[:phone_number],
       height: params[:height],
-      weight: params[:weight]
+      weight: params[:weight],
+      blood_type: params[:blood_type]
     }
     if params[:username]
       @user = User.find_by(username: params[:username])
