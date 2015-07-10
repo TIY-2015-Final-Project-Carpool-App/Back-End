@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   before_validation :ensure_access_token
 
   has_many :children
+  has_many :contacts, as: :contactable
 
   def ensure_access_token
   	if self.access_token.blank?

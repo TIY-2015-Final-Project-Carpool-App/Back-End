@@ -3,4 +3,5 @@ class Child < ActiveRecord::Base
 
   belongs_to :user
   has_one :medical
+  has_many :contacts, as: :contactable
 end
