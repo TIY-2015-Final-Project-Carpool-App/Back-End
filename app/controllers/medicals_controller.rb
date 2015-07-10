@@ -12,15 +12,7 @@ class MedicalsController < ApplicationController
   end
 
   def create
-    attributes = {
-      conditions: params[:conditions],
-      medications: params[:medications],
-      notes: params[:notes],
-      allergies: params[:allergies],
-      insurance: params[:insurance],
-      religious_preference: params[:religious_preference],
-      blood_type: params[:blood_type]
-    }
+    attributes = set_attributes(params)
     @child = Child.find_by(id: params[:id])
     @medical = Medical.new(attributes)
     @medical.child_id = @child.id
@@ -32,15 +24,7 @@ class MedicalsController < ApplicationController
   end
 
   def update
-    attributes = {
-      conditions: params[:conditions],
-      medications: params[:medications],
-      notes: params[:notes],
-      allergies: params[:allergies],
-      insurance: params[:insurance],
-      religious_preference: params[:religious_preference],
-      blood_type: params[:blood_type]
-    }
+    attributes = set_attributes(params)
     @child = Child.find_by(id: params[:id])
     if current_user.access_token == @child.user.access_token
       @medical = @child.medical
@@ -60,6 +44,22 @@ class MedicalsController < ApplicationController
     else
       render json: { message: "Unauthorized to delete this medical information." }, status: :unauthorized
     end
+  end
+
+  private
+
+  def set_attributes(params)
+    attributes = { }
+    list = [
+      :conditions, :medications, :notes, :allergies,
+      :insurance, :religious_preference, :blood_type
+    ]
+    list.each do |l|
+      if params[l]
+        attributes.merge!(l => params[l])
+      end
+    end
+    attributes
   end
 
 end

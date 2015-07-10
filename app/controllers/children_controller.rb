@@ -33,30 +33,14 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    @child = Child.find_by(id: params[:id])
-    @user = User.find_by(id: @child.user_id)
-    attributes = {
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      age: params[:age],
-      dob: params[:dob],
-      address: params[:address],
-      phone_number: params[:phone_number],
-      height: params[:height],
-      weight: params[:weight],
-    }
-    if dob_format(params[:dob])
-      if current_user.access_token == @user.access_token
-        if @child.update(attributes)
-          render partial: 'child.json.jbuilder', status: :ok
-        else
-          render json: { errors: @child.errors.full_messages }, status: :unprocessable_entity
-        end
+    if params[:dob]
+      if dob_format(params[:dob])
+        update_child(params)
       else
-        render json: { message: "Unauthorized to modify this child." }, status: :unauthorized
+        render json: { errors: "DOB format is incorrect." }, status: :unprocessable_entity
       end
     else
-      render json: { errors: "DOB format is incorrect." }, status: :unprocessable_entity
+      update_child(params)
     end
   end
 
@@ -82,17 +66,22 @@ class ChildrenController < ApplicationController
     DOB_REGEX =~ dob
   end
 
+  def set_attributes(params)
+    attributes = { }
+    list = [
+      :first_name, :last_name, :age, :dob,
+      :address, :phone_number, :height, :weight, 
+    ]
+    list.each do |l|
+      if params[l]
+        attributes.merge!(l => params[l])
+      end
+    end
+    attributes
+  end
+
   def create_child(params)
-    attributes = {
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      age: params[:age],
-      dob: params[:dob],
-      address: params[:address],
-      phone_number: params[:phone_number],
-      height: params[:height],
-      weight: params[:weight],
-    }
+    attributes = set_attributes(params)
     if params[:username]
       @user = User.find_by(username: params[:username])
       @child = @user.children.new(attributes)
@@ -104,6 +93,21 @@ class ChildrenController < ApplicationController
       render partial: 'child.json.jbuilder', status: :created
     else
       render json: { errors: @child.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update_child(params)
+    attributes = set_attributes(params)
+    @child = Child.find_by(id: params[:id])
+    @user = User.find_by(id: @child.user_id)
+    if current_user.access_token == @user.access_token
+      if @child.update(attributes)
+        render partial: 'child.json.jbuilder', status: :ok
+      else
+        render json: { errors: @child.errors.full_messages }, status: :unprocessable_entity
+      end
+    else
+      render json: { message: "Unauthorized to modify this child." }, status: :unauthorized
     end
   end
 

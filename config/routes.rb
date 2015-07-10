@@ -17,8 +17,16 @@ Rails.application.routes.draw do
 
   # Medical Model
   get 'child/:id/medical', to: 'medicals#show'         # Show medical information for a child
-  post 'child/:id/medical', to: 'medicals#create'                # Create medical information for a child
+  post 'child/:id/medical', to: 'medicals#create'      # Create medical information for a child
   put 'child/:id/medical', to: 'medicals#update'       # Update medical information for a child
   delete 'child/:id/medical', to: 'medicals#delete'    # Delete medical information for a child
+
+  # Contacts Model
+  get 'child/:id/contacts', to: 'contacts#index'              # Index of contacts for a user
+  get 'user/:username/contacts', to: 'contacts#index'         # Index of contacts for a child
+  post 'child/:id/contacts', to: 'contacts#create'            # Create a contact for a child
+  post 'users/contacts', to: 'contacts#create'                # Create a contact for the current user
+  put 'contact/:id', to: 'contacts#update'                    # Update a contact
+  delete 'contact/:id', to: 'contacts#delete'                 # Deletes a contact by ID
 
 end

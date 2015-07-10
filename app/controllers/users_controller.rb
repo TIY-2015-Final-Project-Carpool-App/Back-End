@@ -7,17 +7,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		pass_hash = password_hash(params[:password])
-		attributes = {
-			username: params[:username],
-			password: pass_hash,
-			first_name: params[:first_name],
-			last_name: params[:last_name],
-			address: params[:address],
-			phone_number: params[:phone_number],
-			email: params[:email],
-			avatar: params[:avatar]
-		}
+		attributes = set_attributes(params)
 		@user = User.new(attributes)
 		if @user.save
 			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
@@ -42,17 +32,7 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find_by(username: params[:username])
-		pass_hash = password_hash(params[:password])
-		attributes = {
-			username: params[:username],
-			password: pass_hash,
-			first_name: params[:first_name],
-			last_name: params[:last_name],
-			address: params[:address],
-			phone_number: params[:phone_number],
-			email: params[:email],
-			avatar: params[:avatar]
-		}
+		attributes = set_attributes(params)
 		if current_user.access_token == @user.access_token
 			if @user.update(attributes)
 				render json: { user: @user.as_json(only: [:id, :username, :first_name, 
@@ -90,6 +70,24 @@ class UsersController < ApplicationController
 	end
 
 	private
+
+	def set_attributes(params)
+		attributes = { }
+    list = [
+			:username, :first_name, :last_name,
+			:address, :phone_number, :email, :avatar
+    ]
+    list.each do |l|
+      if params[l]
+        attributes.merge!(l => params[l])
+      end
+    end
+    if params[:password]
+			pass_hash = password_hash(params[:password])
+    	attributes.merge!(:password => pass_hash)
+    end
+    attributes
+	end
 
 	def password_hash(password)
 		if password.nil? || password.length < 6
