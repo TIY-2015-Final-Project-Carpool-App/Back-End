@@ -29,4 +29,17 @@ Rails.application.routes.draw do
   put 'contact/:id', to: 'contacts#update'                    # Update a contact
   delete 'contact/:id', to: 'contacts#delete'                 # Deletes a contact by ID
 
+  # Carpool Model
+  get 'carpools', to: 'carpools#index'                        # Index of all carpools
+  get 'user/:username/carpools', to: 'carpools#index'         # Index of carpools that a user has joined (activated)
+  get 'user/:username/invites', to: 'carpools#invites'        # Index of carpools that are pending activation
+  get 'carpool/:id', to: 'carpools#show'                      # Show a carpool
+  get 'carpool/:id/users', to: 'carpools#users'               # Index of users that joined a specific carpool
+  post 'carpools', to: 'carpools#create'                      # Create a carpool
+  post 'user/:username/carpool/:id', to: 'carpools#join'      # Invites a user to a specific carpool
+  put 'carpool/:id', to: 'carpools#update'                    # Updates a carpool
+  put 'carpool/:id/activate', to: 'carpools#activate'         # Activates current user to a carpool group
+  delete 'carpool/:id', to: 'carpools#delete'                 # Delete a carpool
+  delete 'user/:username/carpool/:id', to: 'carpools#remove'  # Removes a user from a carpool
+
 end

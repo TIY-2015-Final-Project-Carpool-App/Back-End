@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_many :children
   has_many :contacts, as: :contactable
+  has_many :joined_carpools
+  has_many :carpools, through: :joined_carpools
+  has_many :created_carpools, class_name: "Carpool", foreign_key: :creator_id
 
   def ensure_access_token
   	if self.access_token.blank?

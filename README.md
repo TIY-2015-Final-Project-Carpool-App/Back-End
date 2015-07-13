@@ -857,7 +857,7 @@ Code | Type | Description
 List of all contacts that are associated with a specified user. *Note:* The contactable_type is the type of model that the contact belongs to. The contactable_id is the ID number of the Child/User in which the contact belongs to.
 
 Path:
-`GET '/child/:id/contacts'`
+`GET '/user/:username/contacts'`
 
 **Parameters**
 *None*
