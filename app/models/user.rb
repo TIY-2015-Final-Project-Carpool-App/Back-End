@@ -7,10 +7,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX,
   														            message: "provided is not a valid email." }
 
-  before_validation :ensure_access_token
+  before_validation :ensure_access_token, :downcase_email
 
   has_many :children
   has_many :contacts, as: :contactable
+  has_many :joined_carpools
+  has_many :carpools, through: :joined_carpools
+  has_many :created_carpools, class_name: "Carpool", foreign_key: :creator_id
 
   def ensure_access_token
   	if self.access_token.blank?
@@ -29,5 +32,9 @@ class User < ActiveRecord::Base
   def regenerate_token!
   	self.access_token = nil
   	self.save
+  end
+
+  def downcase_email
+    self.email = self.email.downcase
   end
 end

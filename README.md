@@ -27,6 +27,17 @@
   * [Create Contact for User](#create-contact-for-user)
   * [Update Contact](#update-contact)
   * [Delete Contact](#delete-contact)
+6. [Carpool Model](#carpool-model)
+  * [Carpools Index](#carpools-index)
+  * [User's Carpools Index](#users-carpools-index)
+  * [Show Carpool](#show-carpool)
+  * [Create a Carpool](#create-a-carpool)
+  * [Update a Carpool](#update-a-carpool)
+  * [Delete a Carpool](#delete-a-carpool)
+  * [Remove User from Carpool Group](#remove-user-from-carpool-group)
+  * [User's Pending Invitations Index](#users-pending-invitations-index)
+  * [Invite a User to Carpool](#invite-a-user-to-carpool)
+  * [Activate an Invitation](#activate-an-invitation)
 
 ## **Pagination**
 All request methods that have pagination implemented in its use will will state "***Pagination Enabled***" in its description. If no 'page' or 'per' parameter is specified, the API will automatically apply its default. These parameters are passed in the path as a query or in the JSON request.
@@ -77,7 +88,7 @@ Code | Type | Description
     "last_name": "Debbie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
+    "email": "lil@debbie.com",
     "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
   },
   {
@@ -87,7 +98,7 @@ Code | Type | Description
     "last_name": "Twinkies",
     "address": "1010 Cake Road, Kansas City, MO",
     "phone_number": "800-876-3942",
-    "email": "twinkie@hostess.com"
+    "email": "twinkie@hostess.com",
     "avatar": ""
   }
 ]
@@ -131,7 +142,7 @@ Code | Type | Description
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "email": "lil@debbie.com"
+  "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
 }
 ```
@@ -146,7 +157,7 @@ Code | Type | Description
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "email": "lil@debbie.com"
+  "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
   "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29"
 }
@@ -177,7 +188,7 @@ Code | Type | Description
   "last_name": "Debbie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "email": "lil@debbie.com"
+  "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
 }
 ```
@@ -219,7 +230,7 @@ Code | Type | Description
   "last_name": "Teddie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "email": "lil@debbie.com"
+  "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
 }
 ```
@@ -234,7 +245,7 @@ Code | Type | Description
   "last_name": "Teddie",
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
-  "email": "lil@debbie.com"
+  "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
 }
 ```
@@ -343,7 +354,7 @@ Code | Type | Description
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
-      "email": "lil@debbie.com"
+      "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
     }
   },
@@ -365,7 +376,7 @@ Code | Type | Description
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
-      "email": "lil@debbie.com"
+      "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
     }
   }
@@ -434,7 +445,7 @@ Code | Type | Description
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
+    "email": "lil@debbie.com",
     "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
   }
 }
@@ -478,7 +489,7 @@ Code | Type | Description
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
+    "email": "lil@debbie.com",
     "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
   }
 }
@@ -546,7 +557,7 @@ Code | Type | Description
     "last_name": "Teddie",
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
-    "email": "lil@debbie.com"
+    "email": "lil@debbie.com",
     "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
   }
 }
@@ -617,7 +628,7 @@ Code | Type | Description
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
-      "email": "lil@debbie.com"
+      "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
     }
   },
@@ -692,7 +703,7 @@ Code | Type | Description
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
-      "email": "lil@debbie.com"
+      "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
     }
   },
@@ -765,7 +776,7 @@ Code | Type | Description
       "last_name": "Teddie",
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
-      "email": "lil@debbie.com"
+      "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
     }
   },
@@ -786,7 +797,7 @@ Deletes the medical information for a specified child.
 Path:
 `DELETE '/child/:id/medical'`
 
-**Parameters*
+**Parameters**
 *None*
 
 **Status Codes**
@@ -857,7 +868,7 @@ Code | Type | Description
 List of all contacts that are associated with a specified user. *Note:* The contactable_type is the type of model that the contact belongs to. The contactable_id is the ID number of the Child/User in which the contact belongs to.
 
 Path:
-`GET '/child/:id/contacts'`
+`GET '/user/:username/contacts'`
 
 **Parameters**
 *None*
@@ -1070,3 +1081,654 @@ Code | Type | Description
 204 | Success | Request was received and deleted successfully.
 400 | Error | Bad Request. Specified parameters do not match.
 401 | Error | Unauthorized. A different user is not authorized to delete another user's contacts.
+
+## **Carpool Model**
+
+#### Carpools Index
+
+List of all carpools currently available.
+
+Path: 
+`GET '/carpools'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | List of carpools were successfully returned.
+400 | Error | No carpools found.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 1,
+    "creator": {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    },
+    "title": "Work Carpool",
+    "users": [
+      {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "activated": true,
+        "join_token": null
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "creator": {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com",
+      "avatar": ""
+    },
+    "title": "Mall Carpool",
+    "users": [
+      {
+        "id": 2,
+        "username": "HostTwinkies",
+        "first_name": "Hostess",
+        "last_name": "Twinkies",
+        "address": "1010 Cake Road, Kansas City, MO",
+        "phone_number": "800-876-3942",
+        "email": "twinkie@hostess.com",
+        "avatar": "",
+        "activated": true,
+        "join_token": "5b77de39ba63c420d3a77a9da30488e4"
+      },
+      {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "activated": false,
+        "join_token": "5b77de39ba63c420d3a77a9da30488e4"
+      }
+    ]
+  },
+]
+```
+
+#### User's Carpools Index
+
+List of carpools that a user has joined or has been invited to.
+
+Path:
+`GET '/user/:username/carpools'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | List of carpools were successfully returned.
+400 | Error | No carpools found.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 1,
+    "creator": {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    },
+    "title": "Work Carpool",
+    "users": [
+      {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "activated": true,
+        "join_token": null
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "creator": {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com"
+      "avatar": ""
+    },
+    "title": "Mall Carpool",
+    "users": [
+      {
+        "id": 2,
+        "username": "HostTwinkies",
+        "first_name": "Hostess",
+        "last_name": "Twinkies",
+        "address": "1010 Cake Road, Kansas City, MO",
+        "phone_number": "800-876-3942",
+        "email": "twinkie@hostess.com",
+        "avatar": "",
+        "activated": true,
+        "join_token": "5b77de39ba63c420d3a77a9da30488e4"
+      },
+      {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "activated": false,
+        "join_token": "5b77de39ba63c420d3a77a9da30488e4"
+      }
+    ]
+  },
+]
+```
+
+#### Show Carpool
+
+Shows the information for a specified carpool group.
+
+Path: 
+`GET '/carpool/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Carpool information was successfully returned.
+400 | Error | No carpool with specified ID found.
+
+**Example Response**
+
+```
+{
+  "id": 10,
+  "creator": {
+    "id": 1,
+    "username": "LilDebbie",
+    "first_name": "Lil",
+    "last_name": "Debbie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com",
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  },
+  "title": "School Carpool",
+  "users": [
+    {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true,
+      "join_token": "e335a93e71f52e008ed8146b8892e842"
+    },
+    {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com",
+      "avatar": "",
+      "activated": true,
+      "join_token": "5b77de39ba63c420d3a77a9da30488e4"
+    }
+  ]
+}
+```
+
+#### Create a Carpool
+
+Creates a carpool group that is owned by the currently logged in user. The creator of a carpool is automatically added to the members list and activated (in this case the join_token will not be used).
+
+Path: 
+`POST '/carpools'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+title | string | **Required.** Carpool group's title.
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the carpool.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "title": "School Group"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 14,
+  "creator": {
+    "id": 1,
+    "username": "LilDebbie",
+    "first_name": "Lil",
+    "last_name": "Debbie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com",
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  },
+  "title": "School Group",
+  "users": [
+    {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true,
+      "join_token": "8bc6e6cc28616688a8158cc482d2e45b"
+    }
+  ]
+}
+```
+
+#### Update a Carpool
+
+Updates the information for a specified carpool.
+
+Path:
+`PUT '/carpool/:id'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+title | string | **Required.** Carpool group's title.
+
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully updated the carpool.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "title": "High School Group"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 14,
+  "creator": {
+    "id": 1,
+    "username": "LilDebbie",
+    "first_name": "Lil",
+    "last_name": "Debbie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com",
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  },
+  "title": "High School Group",
+  "users": [
+    {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true,
+      "join_token": "8bc6e6cc28616688a8158cc482d2e45b"
+    }
+  ]
+}
+```
+
+#### Delete a Carpool
+
+Deletes a specified carpool group.
+
+Path:
+`DELETE '/carpool/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's carpool.
+
+**Example Response**
+
+```
+No message is returned.
+```
+
+#### Remove User from Carpool Group
+
+Removes a specified user (member) from a specified carpool group.
+
+Path:
+`DELETE '/carpool/:id/user/:username'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Request was received and deleted successfully, will return updated carpool information with specified user removed.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. Only the creator of the carpool, and the user being removed, can remove a user from a specified carpool.
+
+**Example Route**
+
+`DELETE '/carpool/10/user/HostTwinkies`
+
+**Example Response**
+
+```
+{
+  "id": 10,
+  "creator": {
+    "id": 1,
+    "username": "LilDebbie",
+    "first_name": "Lil",
+    "last_name": "Debbie",
+    "address": "10260 McKee Road, Collegedale, TN 37315",
+    "phone_number": "800-522-4499",
+    "email": "lil@debbie.com",
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  },
+  "title": "School Carpool",
+  "users": [
+    {
+      "id": 1,
+      "username": "LilDebbie",
+      "first_name": "Lil",
+      "last_name": "Debbie",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "800-522-4499",
+      "email": "lil@debbie.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true,
+      "join_token": "e335a93e71f52e008ed8146b8892e842"
+    }
+  ]
+}
+```
+
+#### User's Pending Invitations Index
+
+List of all pending invitations for a specified user that has not been activated.
+
+Path: 
+`GET '/user/:username/invites'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Invitation information was successfully returned.
+400 | Error | No user with specified username found.
+
+**Example Route**
+
+`GET '/user/HostTwinkies/invites'`
+
+**Example Response**
+
+```
+[
+  {
+    "id": 22,
+    "carpool": {
+      "id": 15,
+      "creator": {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      },
+      "title": "School Group",
+      "users": [
+        {
+          "id": 1,
+          "username": "LilDebbie",
+          "first_name": "Lil",
+          "last_name": "Debbie",
+          "address": "10260 McKee Road, Collegedale, TN 37315",
+          "phone_number": "800-522-4499",
+          "email": "lil@debbie.com",
+          "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "activated": true,
+          "join_token": "a7f28e052b67729324e89473d6588c69"
+        },
+        {
+          "id": 2,
+          "username": "HostTwinkies",
+          "first_name": "Hostess",
+          "last_name": "Twinkies",
+          "address": "1010 Cake Road, Kansas City, MO",
+          "phone_number": "800-876-3942",
+          "email": "twinkie@hostess.com",
+          "avatar": "",
+          "activated": false,
+          "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+        }
+      ]
+    },
+    "invited_user": {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com",
+      "avatar": "",
+      "activated": false,
+      "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+    }
+  }
+]
+```
+
+#### Invite a User to Carpool
+
+Creates an invitation to for a specified user to a carpool group. Currently requires the user to be added to have an account with the website. (Will add functionality for non-users when Mailer is setup)
+
+Path: 
+`POST '/carpool/:id'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+email | string | **Required.** The email of a user that is being added to the specified carpool group.
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the invitation.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "email": "twinkie@hostess.com"
+}
+```
+
+#### Activate an Invitation
+
+Activates an invitation for a specified user and carpool. Only the invited user can accept an invitation (must be logged in).
+
+Path:
+`PUT '/carpool/:id/activate'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+join_token | string | **Required.** Token used to accept invitation.
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully accepted the invitation.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+}
+```
+
+**Example Response**
+
+```
+[
+  {
+    "id": 22,
+    "carpool": {
+      "id": 15,
+      "creator": {
+        "id": 1,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      },
+      "title": "School Group",
+      "users": [
+        {
+          "id": 1,
+          "username": "LilDebbie",
+          "first_name": "Lil",
+          "last_name": "Debbie",
+          "address": "10260 McKee Road, Collegedale, TN 37315",
+          "phone_number": "800-522-4499",
+          "email": "lil@debbie.com",
+          "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "activated": true,
+          "join_token": "a7f28e052b67729324e89473d6588c69"
+        },
+        {
+          "id": 2,
+          "username": "HostTwinkies",
+          "first_name": "Hostess",
+          "last_name": "Twinkies",
+          "address": "1010 Cake Road, Kansas City, MO",
+          "phone_number": "800-876-3942",
+          "email": "twinkie@hostess.com",
+          "avatar": "",
+          "activated": true,
+          "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+        }
+      ]
+    },
+    "invited_user": {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com",
+      "avatar": "",
+      "activated": true,
+      "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+    }
+  }
+]
+```
