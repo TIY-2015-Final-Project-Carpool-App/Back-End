@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709181331) do
+ActiveRecord::Schema.define(version: 20150712012553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carpools", force: :cascade do |t|
+    t.integer  "creator_id"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "children", force: :cascade do |t|
     t.string   "first_name"
@@ -44,6 +51,15 @@ ActiveRecord::Schema.define(version: 20150709181331) do
   end
 
   add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree
+
+  create_table "joined_carpools", force: :cascade do |t|
+    t.integer  "carpool_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "activated",  default: false
+    t.string   "join_token"
+  end
 
   create_table "medicals", force: :cascade do |t|
     t.integer  "child_id"

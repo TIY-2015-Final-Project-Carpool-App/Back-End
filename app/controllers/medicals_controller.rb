@@ -7,19 +7,23 @@ class MedicalsController < ApplicationController
     if @medical
       render partial: 'medical', status: :ok
     else
-      render json: { message: "No medical information found." }, status: :no_content
+      render json: { message: "No medical information found." }, status: :bad_request
     end
   end
 
   def create
     attributes = set_attributes(params)
     @child = Child.find_by(id: params[:id])
-    @medical = Medical.new(attributes)
-    @medical.child_id = @child.id
-    if @medical.save
-      render partial: 'medical', status: :created
+    if @child
+      @medical = Medical.new(attributes)
+      @medical.child_id = @child.id
+      if @medical.save
+        render partial: 'medical', status: :created
+      else
+        render json: { errors: @medical.errors.full_messages }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: @medical.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: "No child found with specified ID." }, status: :bad_request
     end
   end
 
