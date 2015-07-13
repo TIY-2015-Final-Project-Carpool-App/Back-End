@@ -7,4 +7,6 @@ json.array! @users do |user|
 	json.phone_number user.phone_number
 	json.email user.email
 	json.avatar user.avatar
+  json.latitude user.latitude
+  json.longitude user.longitude
 end

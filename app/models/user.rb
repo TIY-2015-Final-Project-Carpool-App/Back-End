@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
 	EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   
 	validates :username, presence: true, uniqueness: true
@@ -8,6 +9,8 @@ class User < ActiveRecord::Base
   														            message: "provided is not a valid email." }
 
   before_validation :ensure_access_token, :downcase_email
+  geocoded_by :address
+  after_validation :geocode
 
   has_many :children
   has_many :contacts, as: :contactable
@@ -35,6 +38,8 @@ class User < ActiveRecord::Base
   end
 
   def downcase_email
-    self.email = self.email.downcase
+    if self.email
+      self.email = self.email.downcase
+    end
   end
 end

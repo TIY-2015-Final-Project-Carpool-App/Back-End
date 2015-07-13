@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 		@user = User.new(attributes)
 		if @user.save
 			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-										:last_name, :address, :phone_number, :email, :avatar, :access_token]) }, 
+										:last_name, :address, :phone_number, :email, :avatar, :access_token, 
+                    :latitude, :longitude]) }, 
                     status: :created
 		else
 			render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
@@ -22,7 +23,8 @@ class UsersController < ApplicationController
 		@user = User.find_by(username: params[:username])
 		pass_hash = Digest::SHA1.hexdigest(params[:password])
  		if @user && pass_hash == @user.password
-      render json: { user: @user.as_json(only: [:id, :username, :email, :access_token]) },
+      render json: { user: @user.as_json(only: [:id, :username, :email, :access_token, 
+                     :latitude, :longitude]) },
         status: :created
     else
       render json: { message: "Invalid login or password." },
@@ -36,7 +38,8 @@ class UsersController < ApplicationController
 		if current_user.access_token == @user.access_token
 			if @user.update(attributes)
 				render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-											:last_name, :address, :phone_number, :email, :avatar]) }, status: :ok
+											:last_name, :address, :phone_number, :email, :avatar, 
+                      :latitude, :longitude]) }, status: :ok
 			else
 				render json: { errors: "There was an issue with the specified field entries." }, 
 				 							status: :unprocessable_entity
@@ -63,7 +66,8 @@ class UsersController < ApplicationController
 		@user = User.find_by(username: params[:username])
 		if @user
 			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-										:last_name, :address, :phone_number, :email, :avatar])}, status: :ok
+										:last_name, :address, :phone_number, :email, :avatar, 
+                    :latitude, :longitude])}, status: :ok
 		else
 			render json: { error: @user.errors.full_messages }, status: :bad_request
 		end
