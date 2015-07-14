@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713193504) do
+ActiveRecord::Schema.define(version: 20150714161549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20150713193504) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 20150713193504) do
     t.string   "alternate_number"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree

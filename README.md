@@ -89,7 +89,9 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   },
   {
     "id": 2,
@@ -99,7 +101,9 @@ Code | Type | Description
     "address": "1010 Cake Road, Kansas City, MO",
     "phone_number": "800-876-3942",
     "email": "twinkie@hostess.com",
-    "avatar": ""
+    "avatar": "",
+    "latitude": 42.7719376,
+    "longitude": 109.7156425
   }
 ]
 
@@ -144,6 +148,8 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "latitude": 35.7719376,
+  "longitude": 139.7156425
 }
 ```
 
@@ -159,7 +165,9 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
-  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29"
+  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29",
+  "latitude": 35.7719376,
+  "longitude": 139.7156425
 }
 ```
 
@@ -189,7 +197,9 @@ Code | Type | Description
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
-  "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "latitude": 35.7719376,
+  "longitude": 139.7156425
 }
 ```
 
@@ -231,7 +241,7 @@ Code | Type | Description
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
-  "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
 }
 ```
 
@@ -246,7 +256,9 @@ Code | Type | Description
   "address": "10260 McKee Road, Collegedale, TN 37315",
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
-  "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+  "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "latitude": 35.7719376,
+  "longitude": 139.7156425
 }
 ```
 
@@ -346,7 +358,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": 134,
     "weight": 100,
-    "blood_type": "O",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -368,7 +381,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": 124,
     "weight": 95,
-    "blood_type": "A",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -438,6 +452,8 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": null,
   "weight": null,
+  "latitude": 35.7719376,
+  "longitude": 139.7156425,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -481,7 +497,8 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": 134,
   "weight": 100,
-  "blood_type": "O",
+  "latitude": 35.7719376,
+  "longitude": 139.7156425,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -550,6 +567,8 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "height": null,
   "weight": null,
+  "latitude": 35.7719376,
+  "longitude": 139.7156425,
   "parent": {
     "id": 1,
     "username": "LilDebbie",
@@ -621,6 +640,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": null,
     "weight": null,
+    "latitude": 35.7719376,
+    "longitude": 139.7156425,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -696,6 +717,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": null,
     "weight": null,
+    "latitude": 35.7719376,
+    "longitude": 139.7156425,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -769,6 +792,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "height": null,
     "weight": null,
+    "latitude": 35.7719376,
+    "longitude": 139.7156425,
     "parent": {
       "id": 1,
       "username": "LilDebbie",
@@ -847,7 +872,9 @@ Code | Type | Description
     "relationship": "Uncle",
     "address": null,
     "phone_number": "800-555-5555",
-    "alternate_number": null
+    "alternate_number": null,
+    "latitude": null,
+    "longitude": null
   },
   {
     "id": 2,
@@ -858,7 +885,9 @@ Code | Type | Description
     "relationship": "Aunt",
     "address": "1234 Fake Street, City, GA, 30000",
     "phone_number": "800-111-1111",
-    "alternate_number": "777-777-7777"
+    "alternate_number": "777-777-7777",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   }
 ]
 ```
@@ -894,7 +923,9 @@ Code | Type | Description
     "relationship": "Uncle",
     "address": null,
     "phone_number": "800-555-5555",
-    "alternate_number": null
+    "alternate_number": null,
+    "latitude": null,
+    "longitude": null
   },
   {
     "id": 2,
@@ -905,7 +936,9 @@ Code | Type | Description
     "relationship": "Aunt",
     "address": "1234 Fake Street, City, GA, 30000",
     "phone_number": "800-111-1111",
-    "alternate_number": "777-777-7777"
+    "alternate_number": "777-777-7777",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   }
 ]
 ```
@@ -958,7 +991,9 @@ Code | Type | Description
   "relationship": "Uncle",
   "address": null,
   "phone_number": "800-555-5555",
-  "alternate_number": null
+  "alternate_number": null,
+  "latitude": null,
+  "longitude": null
 }
 ```
 
@@ -1010,7 +1045,9 @@ Code | Type | Description
   "relationship": "Uncle",
   "address": null,
   "phone_number": "800-555-5555",
-  "alternate_number": null
+  "alternate_number": null,
+  "latitude": null,
+  "longitude": null
 }
 ```
 
@@ -1060,7 +1097,9 @@ Code | Type | Description
   "relationship": "Uncle",
   "address": null,
   "phone_number": "800-555-9999",
-  "alternate_number": "999-999-9999"
+  "alternate_number": "999-999-9999",
+  "latitude": null,
+  "longitude": null
 }
 ```
 
@@ -1116,6 +1155,8 @@ Code | Type | Description
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "latitude": 35.7719376,
+      "longitude": 139.7156425
     },
     "title": "Work Carpool",
     "users": [
@@ -1128,6 +1169,8 @@ Code | Type | Description
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
         "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425,
         "activated": true,
         "join_token": null
       }
@@ -1143,7 +1186,9 @@ Code | Type | Description
       "address": "1010 Cake Road, Kansas City, MO",
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com",
-      "avatar": ""
+      "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425
     },
     "title": "Mall Carpool",
     "users": [
@@ -1156,6 +1201,8 @@ Code | Type | Description
         "phone_number": "800-876-3942",
         "email": "twinkie@hostess.com",
         "avatar": "",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425,
         "activated": true,
         "join_token": "5b77de39ba63c420d3a77a9da30488e4"
       },
@@ -1168,6 +1215,8 @@ Code | Type | Description
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
         "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425
         "activated": false,
         "join_token": "5b77de39ba63c420d3a77a9da30488e4"
       }
@@ -1207,7 +1256,9 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425
     },
     "title": "Work Carpool",
     "users": [
@@ -1220,6 +1271,8 @@ Code | Type | Description
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
         "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425,
         "activated": true,
         "join_token": null
       }
@@ -1235,7 +1288,9 @@ Code | Type | Description
       "address": "1010 Cake Road, Kansas City, MO",
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com"
-      "avatar": ""
+      "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425
     },
     "title": "Mall Carpool",
     "users": [
@@ -1248,6 +1303,8 @@ Code | Type | Description
         "phone_number": "800-876-3942",
         "email": "twinkie@hostess.com",
         "avatar": "",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425,
         "activated": true,
         "join_token": "5b77de39ba63c420d3a77a9da30488e4"
       },
@@ -1260,6 +1317,8 @@ Code | Type | Description
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
         "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425,
         "activated": false,
         "join_token": "5b77de39ba63c420d3a77a9da30488e4"
       }
@@ -1298,7 +1357,9 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   },
   "title": "School Carpool",
   "users": [
@@ -1311,6 +1372,8 @@ Code | Type | Description
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": true,
       "join_token": "e335a93e71f52e008ed8146b8892e842"
     },
@@ -1323,6 +1386,8 @@ Code | Type | Description
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com",
       "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": true,
       "join_token": "5b77de39ba63c420d3a77a9da30488e4"
     }
@@ -1371,7 +1436,9 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   },
   "title": "School Group",
   "users": [
@@ -1384,6 +1451,8 @@ Code | Type | Description
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": true,
       "join_token": "8bc6e6cc28616688a8158cc482d2e45b"
     }
@@ -1433,7 +1502,9 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   },
   "title": "High School Group",
   "users": [
@@ -1446,6 +1517,8 @@ Code | Type | Description
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": true,
       "join_token": "8bc6e6cc28616688a8158cc482d2e45b"
     }
@@ -1513,6 +1586,8 @@ Code | Type | Description
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
     "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "latitude": 35.7719376,
+    "longitude": 139.7156425
   },
   "title": "School Carpool",
   "users": [
@@ -1525,6 +1600,8 @@ Code | Type | Description
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
       "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": true,
       "join_token": "e335a93e71f52e008ed8146b8892e842"
     }
@@ -1569,7 +1646,9 @@ Code | Type | Description
         "address": "10260 McKee Road, Collegedale, TN 37315",
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
-        "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425
       },
       "title": "School Group",
       "users": [
@@ -1582,6 +1661,8 @@ Code | Type | Description
           "phone_number": "800-522-4499",
           "email": "lil@debbie.com",
           "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425
           "activated": true,
           "join_token": "a7f28e052b67729324e89473d6588c69"
         },
@@ -1594,6 +1675,8 @@ Code | Type | Description
           "phone_number": "800-876-3942",
           "email": "twinkie@hostess.com",
           "avatar": "",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425,
           "activated": false,
           "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
         }
@@ -1608,6 +1691,8 @@ Code | Type | Description
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com",
       "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
       "activated": false,
       "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
     }
@@ -1687,7 +1772,9 @@ Code | Type | Description
         "address": "10260 McKee Road, Collegedale, TN 37315",
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
-        "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425
       },
       "title": "School Group",
       "users": [
@@ -1700,6 +1787,8 @@ Code | Type | Description
           "phone_number": "800-522-4499",
           "email": "lil@debbie.com",
           "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425,
           "activated": true,
           "join_token": "a7f28e052b67729324e89473d6588c69"
         },
@@ -1712,6 +1801,8 @@ Code | Type | Description
           "phone_number": "800-876-3942",
           "email": "twinkie@hostess.com",
           "avatar": "",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425,
           "activated": true,
           "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
         }
@@ -1726,6 +1817,8 @@ Code | Type | Description
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com",
       "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,  
       "activated": true,
       "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
     }
