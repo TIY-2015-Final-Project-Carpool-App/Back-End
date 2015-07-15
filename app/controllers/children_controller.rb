@@ -26,7 +26,7 @@ class ChildrenController < ApplicationController
   def show
     @child = Child.find_by(id: params[:id])
     if @child
-      render partial: 'child.json.jbuilder', status: :ok
+      render partial: 'child2.json.jbuilder', locals: { child: @child }, status: :ok
     else
       render json: { errors: "Child with specified ID is not found." }, status: :bad_request
     end
@@ -90,7 +90,7 @@ class ChildrenController < ApplicationController
     end
 
     if @child.save
-      render partial: 'child.json.jbuilder', status: :created
+      render partial: 'child2.json.jbuilder', locals: { child: @child }, status: :created
     else
       render json: { errors: @child.errors.full_messages }, status: :unprocessable_entity
     end
@@ -102,7 +102,7 @@ class ChildrenController < ApplicationController
     @user = User.find_by(id: @child.user_id)
     if current_user.access_token == @user.access_token
       if @child.update(attributes)
-        render partial: 'child.json.jbuilder', status: :ok
+        render partial: 'child2.json.jbuilder', locals: { child: @child }, status: :ok
       else
         render json: { errors: @child.errors.full_messages }, status: :unprocessable_entity
       end
