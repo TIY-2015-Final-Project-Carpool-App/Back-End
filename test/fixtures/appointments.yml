@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  creator_id: 1
+  start: 2015-07-15 18:05:46
+  title: MyString
+  description: MyString
+  origin: MyString
+  origin_latitude: 1.5
+  origin_longitude: 1.5
+  destination: MyString
+  destination_latitude: 1.5
+  destination_longitude: 1.5
+
+two:
+  creator_id: 1
+  start: 2015-07-15 18:05:46
+  title: MyString
+  description: MyString
+  origin: MyString
+  origin_latitude: 1.5
+  origin_longitude: 1.5
+  destination: MyString
+  destination_latitude: 1.5
+  destination_longitude: 1.5
