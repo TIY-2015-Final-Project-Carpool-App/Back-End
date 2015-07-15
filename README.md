@@ -1159,6 +1159,7 @@ Code | Type | Description
       "longitude": 139.7156425
     },
     "title": "Work Carpool",
+    "description": null,
     "users": [
       {
         "id": 1,
@@ -1191,6 +1192,7 @@ Code | Type | Description
       "longitude": 139.7156425
     },
     "title": "Mall Carpool",
+    "description": null,
     "users": [
       {
         "id": 2,
@@ -1261,6 +1263,7 @@ Code | Type | Description
       "longitude": 139.7156425
     },
     "title": "Work Carpool",
+    "description": null,
     "users": [
       {
         "id": 1,
@@ -1293,6 +1296,7 @@ Code | Type | Description
       "longitude": 139.7156425
     },
     "title": "Mall Carpool",
+    "description": null,
     "users": [
       {
         "id": 2,
@@ -1362,6 +1366,7 @@ Code | Type | Description
     "longitude": 139.7156425
   },
   "title": "School Carpool",
+  "description": null,
   "users": [
     {
       "id": 1,
@@ -1419,7 +1424,8 @@ Code | Type | Description
 
 ```
 {
-  "title": "School Group"
+  "title": "School Group",
+  "description": "Take the kiddies to school."
 }
 ```
 
@@ -1441,6 +1447,7 @@ Code | Type | Description
     "longitude": 139.7156425
   },
   "title": "School Group",
+  "description": "Take the kiddies to school.",
   "users": [
     {
       "id": 1,
@@ -1485,7 +1492,8 @@ Code | Type | Description
 
 ```
 {
-  "title": "High School Group"
+  "title": "High School Group",
+  "description": "Take the teens to school."
 }
 ```
 
@@ -1507,6 +1515,7 @@ Code | Type | Description
     "longitude": 139.7156425
   },
   "title": "High School Group",
+  "description": "Take the teens to school.",
   "users": [
     {
       "id": 1,
@@ -1590,6 +1599,7 @@ Code | Type | Description
     "longitude": 139.7156425
   },
   "title": "School Carpool",
+  "description": "Take the kiddies to school.",
   "users": [
     {
       "id": 1,
@@ -1651,6 +1661,7 @@ Code | Type | Description
         "longitude": 139.7156425
       },
       "title": "School Group",
+      "description": "Take the kiddies to school.",
       "users": [
         {
           "id": 1,
@@ -1777,6 +1788,7 @@ Code | Type | Description
         "longitude": 139.7156425
       },
       "title": "School Group",
+      "description": "Take the kiddies to school.",
       "users": [
         {
           "id": 1,

@@ -3,6 +3,7 @@ json.creator do
   json.partial! 'users/user', user: carpool.creator
 end
 json.title carpool.title
+json.description carpool.description
 json.users do
   json.array! User.joins(:joined_carpools).where(joined_carpools: { carpool_id: carpool } ) do |user|
     json.partial! 'users/user', user: user
