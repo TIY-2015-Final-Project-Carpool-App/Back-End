@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  appointment_id: 1
+  ridable_id: 1
+  ridable_type: MyString
+  distance_from_origin: 1
+  distance_from_destination: 1
+
+two:
+  appointment_id: 1
+  ridable_id: 1
+  ridable_type: MyString
+  distance_from_origin: 1
+  distance_from_destination: 1
