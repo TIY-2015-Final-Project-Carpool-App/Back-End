@@ -42,6 +42,9 @@ gem 'kaminari'
 # Allow HTTP requests for Google Maps API
 gem 'httparty'
 
+# Add Geocoder to obtain latitude/longitude for users
+gem 'geocoder'
+
 group :development, :test do
 	# Development debugging
 	gem 'pry'

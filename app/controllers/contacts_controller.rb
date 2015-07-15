@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :authenticate_with_user!, except: [:create]
+  before_action :authenticate_with_token!, except: [:create]
 
   def index
     if params[:id]
