@@ -1,0 +1,11 @@
+json.id contact.id
+json.contactable_id contact.contactable_id
+json.contactable_type contact.contactable_type
+json.first_name contact.first_name
+json.last_name contact.last_name
+json.relationship contact.relationship
+json.address contact.address
+json.phone_number contact.phone_number
+json.alternate_number contact.alternate_number
+json.latitude contact.latitude
+json.longitude contact.longitude
