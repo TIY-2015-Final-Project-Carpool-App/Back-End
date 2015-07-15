@@ -57,7 +57,8 @@ class CarpoolsController < ApplicationController
   # end
 
   def create
-    @carpool = current_user.created_carpools.new(title: params[:title])
+    attributes = set_attributes(params)
+    @carpool = current_user.created_carpools.new(attributes)
     if @carpool.save
       @joined_carpool = current_user.joined_carpools.create(carpool_id: @carpool.id, activated: true)
       render partial: 'carpool', locals: { carpool: @carpool }, status: :created
@@ -93,7 +94,8 @@ class CarpoolsController < ApplicationController
   def update
     @carpool = Carpool.find_by(id: params[:id])
     if @carpool
-      if @carpool.update(title: params[:title])
+      attributes = set_attributes(params)
+      if @carpool.update(attributes)
         render partial: 'carpool', locals: { carpool: @carpool }, status: :ok
       else
         render json: { errors: @carpool.errors.full_messages }, status: :unprocessable_entity
@@ -151,6 +153,21 @@ class CarpoolsController < ApplicationController
       render json: { message: 'Current user is not authorized to remove this user from specified carpool.' },
                      status: :unauthorized
     end
+  end
+
+  private
+
+  def set_attributes(params)
+    attributes = { }
+    list = [
+      :title, :description
+    ]
+    list.each do |l|
+      if params[l]
+        attributes.merge!(l => params[l])
+      end
+    end
+    attributes
   end
 
 end
