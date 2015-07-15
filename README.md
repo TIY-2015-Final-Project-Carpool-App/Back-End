@@ -1412,6 +1412,7 @@ Path:
 Name | Type | Description
 --- | --- | ---
 title | string | **Required.** Carpool group's title.
+description | string | A description of a carpool.
 
 **Status Codes**
 
@@ -1479,6 +1480,7 @@ Path:
 Name | Type | Description
 --- | --- | ---
 title | string | **Required.** Carpool group's title.
+description | string | A description of a carpool.
 
 
 **Status Codes**
