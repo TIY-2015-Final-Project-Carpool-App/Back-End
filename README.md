@@ -1715,7 +1715,7 @@ Code | Type | Description
 
 #### Invite a User to Carpool
 
-Creates an invitation to for a specified user to a carpool group. Currently requires the user to be added to have an account with the website. (Will add functionality for non-users when Mailer is setup)
+Creates an invitation to for a specified user to a carpool group. Currently requires the user to be added to have an account with the website. (Will add functionality for non-users when Mailer is setup).
 
 Path: 
 `POST '/carpool/:id'`
@@ -1724,7 +1724,7 @@ Path:
 
 Name | Type | Description
 --- | --- | ---
-email | string | **Required.** The email of a user that is being added to the specified carpool group.
+emails | array | **Required.** A list of emails associated with a user to be invited to a carpool.
 
 **Status Codes**
 
@@ -1737,8 +1737,143 @@ Code | Type | Description
 
 ```
 {
-  "email": "twinkie@hostess.com"
+  "emails": ["lionking@diznay.com", "twinkie@hostess.com"]
 }
+```
+
+**Example Response**
+
+```
+[
+  {
+    "id": 22,
+    "carpool": {
+      "id": 15,
+      "creator": {
+        "id": 3,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425
+      },
+      "title": "School Group",
+      "description": "Take the kiddies to school.",
+      "users": [
+        {
+          "id": 1,
+          "username": "LKing",
+          "first_name": "Simba",
+          "last_name": "King",
+          "address": "10260 McKee Road, Collegedale, TN 37315",
+          "phone_number": "777-777-7777",
+          "email": "lionking@diznay.com",
+          "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425
+          "activated": false,
+          "join_token": "a7f28e052b67729324e89473d6588c69"
+        },
+        {
+          "id": 2,
+          "username": "HostTwinkies",
+          "first_name": "Hostess",
+          "last_name": "Twinkies",
+          "address": "1010 Cake Road, Kansas City, MO",
+          "phone_number": "800-876-3942",
+          "email": "twinkie@hostess.com",
+          "avatar": "",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425,
+          "activated": false,
+          "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+        }
+      ]
+    },
+    "invited_user": {
+      "id": 1,
+      "username": "LKing",
+      "first_name": "Simba",
+      "last_name": "King",
+      "address": "10260 McKee Road, Collegedale, TN 37315",
+      "phone_number": "777-777-7777",
+      "email": "lionking@diznay.com",
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425
+      "activated": false,
+      "join_token": "a7f28e052b67729324e89473d6588c69"
+    }
+  },
+  {
+    "id": 22,
+    "carpool": {
+      "id": 15,
+      "creator": {
+        "id": 3,
+        "username": "LilDebbie",
+        "first_name": "Lil",
+        "last_name": "Debbie",
+        "address": "10260 McKee Road, Collegedale, TN 37315",
+        "phone_number": "800-522-4499",
+        "email": "lil@debbie.com",
+        "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "latitude": 35.7719376,
+        "longitude": 139.7156425
+      },
+      "title": "School Group",
+      "description": "Take the kiddies to school.",
+      "users": [
+        {
+          "id": 1,
+          "username": "LKing",
+          "first_name": "Simba",
+          "last_name": "King",
+          "address": "10260 McKee Road, Collegedale, TN 37315",
+          "phone_number": "777-777-7777",
+          "email": "lionking@diznay.com",
+          "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425
+          "activated": false,
+          "join_token": "a7f28e052b67729324e89473d6588c69"
+        },
+        {
+          "id": 2,
+          "username": "HostTwinkies",
+          "first_name": "Hostess",
+          "last_name": "Twinkies",
+          "address": "1010 Cake Road, Kansas City, MO",
+          "phone_number": "800-876-3942",
+          "email": "twinkie@hostess.com",
+          "avatar": "",
+          "latitude": 35.7719376,
+          "longitude": 139.7156425,
+          "activated": false,
+          "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+        }
+      ]
+    },
+    "invited_user": {
+      "id": 2,
+      "username": "HostTwinkies",
+      "first_name": "Hostess",
+      "last_name": "Twinkies",
+      "address": "1010 Cake Road, Kansas City, MO",
+      "phone_number": "800-876-3942",
+      "email": "twinkie@hostess.com",
+      "avatar": "",
+      "latitude": 35.7719376,
+      "longitude": 139.7156425,
+      "activated": false,
+      "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
+    }
+  }
+]
 ```
 
 #### Activate an Invitation
