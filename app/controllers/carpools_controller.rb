@@ -78,17 +78,6 @@ class CarpoolsController < ApplicationController
           complete_joins << join_individual(email, @carpool)
         end
         render 'joins', locals: { joined_carpools: complete_joins }, status: :created
-        # @user = User.find_by(email: params[:email].downcase)
-        # if @user
-        #   @joined_carpool = @user.joined_carpools.new(carpool_id: @carpool.id)
-        #   if @joined_carpool.save
-        #     render partial: 'joined', locals: { joined_carpool: @joined_carpool }, status: :created
-        #   else
-        #     render json: { errors: @joined_carpool.errors.full_messages }, status: :unprocessable_entity
-        #   end
-        # else
-        #   render json: { errors: "No user found with specified email." }, status: :bad_request
-        # end
       else
         render json: { message: "Only the creator of a carpool can invite users." }, status: :unprocessable_entity
       end
@@ -190,4 +179,8 @@ class CarpoolsController < ApplicationController
       render json: { errors: "No user found with specified email." }, status: :bad_request
     end
   end
+
 end
+
+
+

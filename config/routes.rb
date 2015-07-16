@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   delete 'appointment/:id', to: 'appointments#delete'             # Deletes an appointment
 
   # Riders
-  post 'carpool/:id/appointments/join', to: 'riders#create'      # Joins a user/child to an appointment
+  post 'appointment/:id/join', to: 'riders#create'               # Joins a user/child to an appointment
   put 'user/:username/appointment/:id', to: 'riders#update'      # Updates a user's appointment type
   put 'child/:child_id/appointment/:id', to: 'riders#update'     # Updates a child's appointment type
   delete 'user/:username/appointment/:id', to: 'riders#delete'   # Removes a user from an appointment

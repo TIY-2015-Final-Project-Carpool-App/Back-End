@@ -41,7 +41,7 @@ class AppointmentsController < ApplicationController
   def show
     @appointment = Appointment.find_by(id: params[:id])
     if @appointment
-      render partial: 'appointment', locals: { appointment: @appointment }, status: :ok
+      render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
     else
       render json: { errors: "No appointment found with specified ID." }, status: :bad_request
     end
@@ -55,7 +55,7 @@ class AppointmentsController < ApplicationController
     @appointment.carpool_id = @carpool.id
     if @appointment.save
       @rider = current_user.riders.create(appointment_id: @appointment.id, rider_role: "Driver")
-      render partial: 'appointment', locals: { appointment: @appointment }, status: :created
+      render partial: 'appointment2', locals: { appointment: @appointment }, status: :created
     else
       render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
     end
@@ -67,7 +67,7 @@ class AppointmentsController < ApplicationController
     if @appointment
       if current_user.access_token == @appointment.creator.access_token
         if @appointment.update(attributes)
-          render partial: 'appointment', locals: { appointment: @appointment }, status: :ok
+          render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
         else
           render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
         end
@@ -102,7 +102,7 @@ class AppointmentsController < ApplicationController
     attributes = { }
     list = [
       :start, :title, :description,
-      :origin, :destination, :email, :avatar
+      :origin, :destination
     ]
     list.each do |l|
       if params[l]

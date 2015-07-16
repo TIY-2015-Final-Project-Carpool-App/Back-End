@@ -1,4 +1,3 @@
 json.array! appointments do |appointment|
-  json.partial! 'appointment', appointment: appointment
-  # Need to add riders
+  json.partial! 'appointment2', appointment: appointment
 end

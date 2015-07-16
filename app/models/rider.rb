@@ -13,7 +13,6 @@ class Rider < ActiveRecord::Base
     destination_coordinates = Geocoder.coordinates(destination)
     distance_from_origin = Geocoder::Calculations.distance_between(user_coordinates, origin_coordinates)
     distance_from_destination = Geocoder::Calculations.distance_between(user_coordinates, destination_coordinates)
-    binding.pry
     
     self.distance_from_destination = distance_from_destination
     self.distance_from_origin = distance_from_origin

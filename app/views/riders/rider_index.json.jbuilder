@@ -1,3 +1,3 @@
 json.array! riders do |rider|
-  json.partial! 'rider', rider: rider
+  json.partial! 'riders/rider', rider: rider
 end
