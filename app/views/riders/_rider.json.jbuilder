@@ -1,0 +1,6 @@
+json.id rider.id
+json.appointment_id rider.appointment_id
+json.ridable_id rider.ridable_id
+json.ridable_type rider.ridable_type
+json.distance_from_origin rider.distance_from_origin
+json.distance_from_destination rider.distance_from_destination

@@ -43,15 +43,17 @@ Rails.application.routes.draw do
   get 'user/:username/invites', to: 'carpools#invites'        # Index of carpools that are pending activation
   post 'carpool/:id', to: 'carpools#join'                     # Invites a user to a specific carpool
   put 'carpool/:id/activate', to: 'carpools#activate'         # Activates current user to a carpool group
+  # delete 'invite/:id', to: 'carpool#remove_invite'            # Declines an invite to a carpool group
 
   # Appointments
   get 'carpool/:id/appointments', to: 'appointments#index'       # Index of appointments in a carpool
   get 'user/:username/appointments', to: 'appointments#index'    # Index of appointments a user has (rider or driver) * Add query params to specify driver/rider
   get 'appointment/:id', to: 'appointments#show'                 # Shows an individual appointment
   post 'carpool/:id/appointments', to: 'appointments#create'     # Creates an appointment for a carpool, auto adds the creator 
-  post 'carpool/:id/appointments/join', to: 'riders#create'      # Joins a user/child to an appointment
   put 'appointment/:id', to: 'appointments#update'               # Updates an appointment
-  delete 'appointment/:id', to: 'appointment#delete'             # Deletes an appointment
+  delete 'appointment/:id', to: 'appointments#delete'             # Deletes an appointment
+
+  # Riders
   post 'carpool/:id/appointments/join', to: 'riders#create'      # Joins a user/child to an appointment
   put 'user/:username/appointment/:id', to: 'riders#update'      # Updates a user's appointment type
   put 'child/:child_id/appointment/:id', to: 'riders#update'     # Updates a child's appointment type
