@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
         status: :unauthenticated
     end
   end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: { route: request.path,
+                   exception: "No such record: #{e.message}" },
+      status: :not_found
+  end
 end

@@ -1,5 +1,5 @@
 class Appointment < ActiveRecord::Base
-  validates :start, :title, :description, :origin, :destination, presence: true
+  validates :start, :title, :origin, :destination, :distance_filter, presence: true
 
   belongs_to :carpool
   belongs_to :creator, class_name: "User", foreign_key: :creator_id

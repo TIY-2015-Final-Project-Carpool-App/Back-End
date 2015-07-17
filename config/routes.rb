@@ -46,18 +46,18 @@ Rails.application.routes.draw do
   # delete 'invite/:id', to: 'carpool#remove_invite'            # Declines an invite to a carpool group
 
   # Appointments
-  get 'carpool/:id/appointments', to: 'appointments#index'       # Index of appointments in a carpool
-  get 'user/:username/appointments', to: 'appointments#index'    # Index of appointments a user has (rider or driver) * Add query params to specify driver/rider
-  get 'appointment/:id', to: 'appointments#show'                 # Shows an individual appointment
-  post 'carpool/:id/appointments', to: 'appointments#create'     # Creates an appointment for a carpool, auto adds the creator 
-  put 'appointment/:id', to: 'appointments#update'               # Updates an appointment
-  delete 'appointment/:id', to: 'appointments#delete'             # Deletes an appointment
+  get 'carpool/:id/appointments', to: 'appointments#index_carpool'  # Index of appointments in a carpool
+  get 'user/:username/appointments', to: 'appointments#index_user'  # Index of appointments a user has (rider or driver) * Add query params to specify driver/rider
+  get 'appointment/:id', to: 'appointments#show'                    # Shows an individual appointment
+  post 'carpool/:id/appointments', to: 'appointments#create'        # Creates an appointment for a carpool, auto adds the creator 
+  put 'appointment/:id', to: 'appointments#update'                  # Updates an appointment
+  delete 'appointment/:id', to: 'appointments#delete'               # Deletes an appointment
 
   # Riders
-  post 'appointment/:id/join', to: 'riders#create'               # Joins a user/child to an appointment
-  put 'user/:username/appointment/:id', to: 'riders#update'      # Updates a user's appointment type
-  put 'child/:child_id/appointment/:id', to: 'riders#update'     # Updates a child's appointment type
-  delete 'user/:username/appointment/:id', to: 'riders#delete'   # Removes a user from an appointment
-  delete 'child/:child_id/appointment/:id', to: 'riders#delete'  # Removes a child from an appointment
+  post 'user/:username/appointment/:id/join', to: 'riders#create_user'    # Joins a user to an appointment
+  post 'child/:child_id/appointment/:id/join', to: 'riders#create_child'  # Joins a child to an appointment
+  put 'user/:username/appointment/:id', to: 'riders#update_user'          # Updates a user's rider role
+  delete 'user/:username/appointment/:id', to: 'riders#delete_user'       # Removes a user from an appointment
+  delete 'child/:child_id/appointment/:id', to: 'riders#delete_child'     # Removes a child from an appointment
 
 end

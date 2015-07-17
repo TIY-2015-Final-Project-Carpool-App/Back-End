@@ -1,50 +1,28 @@
 class AppointmentsController < ApplicationController
 
-  def index
-    if params[:id]
-      @carpool = Carpool.find_by(id: params[:id])
-      if @carpool
-        @appointments = @carpool.appointments
-        if !@appointments.empty?
-          render 'index.json.jbuilder', locals: { appointments: @appointments }, status: :ok
-          # Incomplete, need to add riders to json response
-        else
-          render json: { errors: "No appointments found on specifed carpool ID." }, status: :bad_request
-        end
-      else
-        render json: { errors: "No carpool found with specified ID." }, status: :bad_request
-      end
+  def index_carpool
+    @carpool = Carpool.find(params[:id])
+    @appointments = @carpool.appointments
+    if @appointments.empty?
+      render json: { errors: "No appointments found on specifed carpool ID." }, status: :bad_request
     else
-      @user = User.find_by(username: params[:username])
-      if @user
-        if params[:created] == true
-          @appointments = @user.created_appointments
-          if !@appointments.empty?
-            render 'index.json.jbuilder', locals: { appointments: @appointments }, status: :ok
-          else
-            render json: { errors: "No appointments created by specified user." }, status: :bad_request
-          end
-        else
-          @riders = @user.riders
-          if !@riders.empty?
-            render 'riders/rider_index.json.jbuilder', locals: { riders: @riders }, status: :ok
-          else
-            render json: { errors: "No appointments found for specified user." }, status: :bad_request
-          end
-        end
-      else
-        render json: { errors: "No user found with specified username." }, status: :bad_request
-      end
-    end 
+      render 'index.json.jbuilder', locals: { appointments: @appointments }, status: :ok
+    end
+  end
+
+  def index_user
+    @user = User.find_by!(username: params[:username])
+    @riders = @user.riders
+    if @riders.empty?
+      render json: { errors: "No appointments found for specified user." }, status: :bad_request
+    else
+      render 'riders/rider_index.json.jbuilder', locals: { riders: @riders }, status: :ok
+    end
   end
 
   def show
-    @appointment = Appointment.find_by(id: params[:id])
-    if @appointment
-      render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
-    else
-      render json: { errors: "No appointment found with specified ID." }, status: :bad_request
-    end
+    @appointment = Appointment.find(params[:id])
+    render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
   end
 
   # Need to add restrictions to creation of appointments to users verified in the group only
@@ -102,7 +80,7 @@ class AppointmentsController < ApplicationController
     attributes = { }
     list = [
       :start, :title, :description,
-      :origin, :destination
+      :origin, :destination, :distance_filter
     ]
     list.each do |l|
       if params[l]

@@ -1,99 +1,80 @@
 class RidersController < ApplicationController
 
-  def create
-    @appointment = Appointment.find_by(id: params[:id])
-    if params[:username] || params[:child_id]
-      params[:username] ? @ridable = User.find_by(username: params[:username]) : @ridable = Child.find_by(id: params[:id])
-      if @ridable
-        if @ridable.is_a? Child
-          if current_user.access_token == @ridable.user.access_token
-            @rider = @ridable.riders.new(appointment_id: @appointment.id)
-            if @rider.save
-              render partial: 'appointment/appointment2', locals: { appointment: @rider.appointment }, status: :created
-            else
-              render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
-            end
-          else 
-            render json: { errors: "Unauthorized to add another user's child." }, status: :unauthorized
-          end
-        else
-          if current_user.access_token == @ridable.access_token 
-            @rider = @ridable.riders.new(appointment_id: @appointment.id)
-            if @rider.save
-              render partial: 'appointment/appointment2', locals: { appointment: @rider.appointment }, status: :created
-            else
-              render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
-            end
-          else
-            render json: { errors: "Unauthorized to add another user to an appointment." }, status: :unauthorized
-          end
-        end
+  def create_user
+    @appointment = Appointment.find(params[:id])
+    @user = User.find_by!(username: params[:username])
+    if current_user.access_token == @user.access_token
+      @rider = @user.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
+      if @rider.save
+        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+               status: :created
       else
-        render json: { errors: "No user or child found with specified username/ID." }, status: :unprocessable_entity
+        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { errors: "Must provide a username or child ID." }, status: :unprocessable_entity
-    end  
-  end
-
-  def update
-    @appointment = Appointment.find_by(id: params[:id])
-    if params[:username] || params[:child_id]
-      params[:username] ? @ridable = User.find_by(username: params[:username]) : @ridable = Child.find_by(id: params[:id])
-      if @ridable.is_a? Child
-        if current_user.access_token == @ridable.user.access_token
-          if @ridable.update(rider_role: params[:rider_role])
-            render partial: 'appointment/appointment2', locals: { appointment: @rider.appointment }, status: :created
-          else
-            render json: { errors: @ridable.errors.full_messages }, status: :unprocessable_entity
-          end
-        else
-          render json: { errors: "Unauthorized access." }, status: :unauthorized
-        end
-      else
-        if current_user.access_token == @ridable.access_token
-          if @ridable.update(rider_role: params[:rider_role])
-            render partial: 'appointment/appointment2', locals: { appointment: @rider.appointment }, status: :created
-          else
-            render json: { errors: @ridable.errors.full_messages }, status: :unprocessable_entity
-          end
-        else
-          render json: { errors: "Unauthorized access." }, status: :unauthorized
-        end
-      end
-    else
-      render json: { errors: "Must provide a username or child ID." }, status: :unprocessable_entity
+      render json: { errors: "Unauthorized access." }, status: :unauthorized
     end
   end
 
-  def delete
-    @appointment = Appointment.find_by(id: params[:id])
-    if params[:username] || params[:child_id]
-      params[:username] ? @ridable = User.find_by(username: params[:username]) : @ridable = Child.find_by(id: params[:id])
-      if @ridable.is_a? Child
-        if current_user.access_token == @ridable.user.access_token
-          if @ridable.destroy
-            render json: { message: "Rider deleted." }, status: :no_content
-          else
-            render json: { errors: @ridable.errors.full_messages }, status: :unprocessable_entity
-          end
-        else
-          render json: { errors: "Unauthorized access." }, status: :unauthorized
-        end
+  def create_child
+    @appointment = Appointment.find(params[:id])
+    @child = Child.find(params[:child_id])
+    if current_user.access_token == @child.user.access_token
+      @rider = @child.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
+      if @rider.save
+        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+               status: :created
       else
-        if current_user.access_token == @ridable.access_token
-          if @ridable.destroy
-            render json: { message: "Rider deleted" }, status: :no_content
-          else
-            render json: { errors: @ridable.errors.full_messages }, status: :unprocessable_entity
-          end
-        else
-          render json: { errors: "Unauthorized access." }, status: :unauthorized
-        end
+        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { errors: "Must provide a username or child ID." }, status: :unprocessable_entity
+      render json: { errors: "Unauthorized access." }, status: :unauthorized
     end
   end
 
+  def update_user
+    @appointment = Appointment.find(params[:id])
+    @user = User.find_by!(username: params[:username])
+    if current_user.access_token == @user.access_token
+      @rider = @user.riders.where(appointment_id: @appointment.id).first
+      if @rider.update(rider_role: params[:rider_role])
+        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+               status: :created
+      else
+        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity 
+      end
+    else
+      render json: { errors: "Unauthorized access." }, status: :unauthorized
+    end
+  end
+
+  def delete_user
+    @appointment = Appointment.find(id: params[:id])
+    @user = User.find_by!(username: params[:username])
+    if current_user.access_token == @user.access_token
+      @rider = @user.riders.where(appointment_id: @appointment.id).first
+      if @rider.destroy
+        render json: { message: 'Deleted rider.' }, status: :no_content
+      else  
+        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
+      end
+    else
+      render json: { errors: "Unauthorized access." }, status: :unauthorized
+    end
+  end
+
+  def delete_child
+    @appointment = Appointment.find(params[:id])
+    @child = Child.find(params[:child_id])
+    if current_user.access_token == @child.user.access_token
+      @rider = @child.riders.where(appointment_id: @appointment.id).first
+      if @rider.destroy
+        render json: { message: "Deleted rider." }, status: :no_content
+      else
+        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity 
+      end
+    else
+      render json: { errors: "Unauthorized access." }, status: :unauthorized
+    end
+  end
 end

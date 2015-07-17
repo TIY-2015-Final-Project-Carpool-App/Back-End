@@ -42,20 +42,6 @@ class CarpoolsController < ApplicationController
     end
   end
 
-  # def users
-  #   @carpool = Carpool.find_by(id: params[:id])
-  #   if @carpool
-  #     @users = User.joins(:joined_carpools).where(joined_carpools: { carpool_id: @carpool } )
-  #     if @users
-  #       render 'index_users.json.jbuilder', status: :ok
-  #     else
-  #       render json: { message: "No users found." }, status: :bad_request
-  #     end
-  #   else
-  #     render json: { message: "No carpool found." }, status: :bad_request
-  #   end
-  # end
-
   def create
     attributes = set_attributes(params)
     @carpool = current_user.created_carpools.new(attributes)
@@ -69,21 +55,12 @@ class CarpoolsController < ApplicationController
 
   # Require username if user joining != current_user
   def join
-    @carpool = Carpool.find_by(id: params[:id])
-    if @carpool
-      if current_user.access_token == @carpool.creator.access_token
-        complete_joins = [ ]
-        emails = params[:emails]
-        emails.each do |email|
-          complete_joins << join_individual(email, @carpool)
-        end
-        render 'joins', locals: { joined_carpools: complete_joins }, status: :created
-      else
-        render json: { message: "Only the creator of a carpool can invite users." }, status: :unprocessable_entity
-      end
-    else
-      render json: { message: "No carpool found with specified ID." }, status: :bad_request
-    end
+    emails = params[:emails]
+    @carpool = current_user.created_carpools.find(params[:id])
+    @carpool = @carpool.join_emails(emails)
+    @joined_carpools = @carpool.joined_carpools
+
+    render 'joins.json.jbuilder', locals: { joined_carpools: @joined_carpools }, status: :created
   end
 
   def update
@@ -163,21 +140,6 @@ class CarpoolsController < ApplicationController
       end
     end
     attributes
-  end
-
-  def join_individual(email, carpool)
-    @user = User.find_by(email: email.downcase)
-    if @user
-      @joined_carpool = @user.joined_carpools.new(carpool_id: carpool.id)
-      if @joined_carpool.save
-        @joined_carpool
-        # render partial: 'joined', locals: { joined_carpool: @joined_carpool }, status: :created
-      else
-        render json: { errors: @joined_carpool.errors.full_messages }, status: :unprocessable_entity
-      end
-    else
-      render json: { errors: "No user found with specified email." }, status: :bad_request
-    end
   end
 
 end

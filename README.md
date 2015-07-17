@@ -38,6 +38,19 @@
   * [User's Pending Invitations Index](#users-pending-invitations-index)
   * [Invite a User to Carpool](#invite-a-user-to-carpool)
   * [Activate an Invitation](#activate-an-invitation)
+7. [Appointment Model](#appointment-model)
+  * [Carpool Appointment Index](#carpool-appointment-index)
+  * [User Appointment Index](#user-appointment-index)
+  * [Show Appointment](#show-appointment)
+  * [Create Appointment](#create-appointment)
+  * [Update an Appointment](#update-an-appointment)
+  * [Delete Appointment](#delete-appointment)
+8. [Rider Model](#rider-model)
+  * [Join Appointment (User)](#join-appointment-user)
+  * [Join Appointment (Child)](#join-appointment-child)
+  * [Update a User's Rider Role](#update-a-users-rider-role)
+  * [Remove a User from Appointment](#remove-a-user-from-appointment)
+  * [Remove a Child from Appointment](#remove-a-child-from-appointment)
 
 ## **Pagination**
 All request methods that have pagination implemented in its use will will state "***Pagination Enabled***" in its description. If no 'page' or 'per' parameter is specified, the API will automatically apply its default. These parameters are passed in the path as a query or in the JSON request.
@@ -1973,4 +1986,906 @@ Code | Type | Description
     }
   }
 ]
+```
+
+## Appointment Model
+
+#### Carpool Appointment Index
+
+List of all appointments in a carpool
+
+Path:
+`GET '/carpool/:id/appointments'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All users were successfully returned.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 20,
+    "carpool_id": 17,
+    "creator": {
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "start": "2015-01-30T10:00:00.000-05:00",
+    "title": "Something",
+    "description": "none",
+    "origin": "190 Marietta St NW, Atlanta, GA 30303",
+    "origin_latitude": 32.3182314,
+    "origin_longitude": -86.902298,
+    "destination": "225 Baker St NW, Atlanta, GA 30313",
+    "destination_latitude": 27.6648274,
+    "destination_longitude": -81.5157535,
+    "riders": [
+      {
+        "appointment_id": 20,
+        "rider": {
+          "id": 11,
+          "username": "testuser23",
+          "first_name": "test",
+          "last_name": "user23",
+          "address": "100 Peachtree St NE Atlanta, GA",
+          "phone_number": "(404) 221-2540",
+          "email": "test23@email.com",
+          "avatar": "http://i.imgur.com/nepC0uk.jpg",
+          "latitude": 33.7868171,
+          "longitude": -84.3827744
+        },
+        "ridable_type": "User",
+        "distance_from_origin": 2,
+        "distance_from_destination": 455
+        "rider_role": "Driver"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "carpool_id": 17,
+    "creator": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "start": "2015-01-30T10:00:00.000-05:00",
+    "title": "Something",
+    "description": "none",
+    "origin": "atlanta, ga",
+    "origin_latitude": 33.7489954,
+    "origin_longitude": -84.3879824,
+    "destination": "florida",
+    "destination_latitude": 27.6648274,
+    "destination_longitude": -81.5157535,
+    "riders": [
+      {
+        "appointment_id": 28,
+        "rider": {
+          "id": 11,
+          "username": "testuser23",
+          "first_name": "test",
+          "last_name": "user23",
+          "address": "100 Peachtree St NE Atlanta, GA",
+          "phone_number": "(404) 221-2540",
+          "email": "test23@email.com",
+          "avatar": "http://i.imgur.com/nepC0uk.jpg",
+          "latitude": 33.7868171,
+          "longitude": -84.3827744
+        },
+        "ridable_type": "User",
+        "distance_from_origin": 2,
+        "distance_from_destination": 455
+        "rider_role": "Driver"
+      },
+      {
+        "appointment_id": 28,
+        "rider": {
+          "id": 12,
+          "username": "testuser24",
+          "first_name": "test",
+          "last_name": "user24",
+          "address": "100 Something St Atlanta, GA",
+          "phone_number": "(404) 221-2540",
+          "email": "test24@email.com",
+          "avatar": "",
+          "latitude": 33.7868171,
+          "longitude": -84.3827744
+        },
+        "ridable_type": "User",
+        "distance_from_origin": 10,
+        "distance_from_destination": 455
+      },
+    ]
+  },
+]
+```
+
+#### User Appointment Index
+
+List of all appointments a user is associated with.
+
+Path:
+`GET '/user/:username/appointments'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All users were successfully returned.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 28,
+    "carpool_id": 17,
+    "creator": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "start": "2015-01-30T10:00:00.000-05:00",
+    "title": "Something",
+    "description": "none",
+    "origin": "atlanta, ga",
+    "origin_latitude": 33.7489954,
+    "origin_longitude": -84.3879824,
+    "destination": "florida",
+    "destination_latitude": 27.6648274,
+    "destination_longitude": -81.5157535,
+    "distance_filter": 400,
+    "riders": [
+      {
+        "appointment_id": 28,
+        "rider": {
+          "id": 11,
+          "username": "testuser23",
+          "first_name": "test",
+          "last_name": "user22",
+          "address": "100 Peachtree St NE Atlanta, GA",
+          "phone_number": "(404) 221-2540",
+          "email": "test23@email.com",
+          "avatar": "http://i.imgur.com/nepC0uk.jpg",
+          "latitude": 33.7868171,
+          "longitude": -84.3827744
+        },
+        "ridable_type": "User",
+        "distance_from_origin": 2,
+        "distance_from_destination": 455,
+        "rider_role": "Driver"
+      }
+    ],
+    "appointment_id": 28,
+    "rider": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "ridable_type": "User",
+    "distance_from_origin": 2,
+    "distance_from_destination": 455,
+    "rider_role": "Driver"
+  }
+]
+```
+
+#### Show Appointment
+
+Shows the attributes of a specified appointment.
+
+Path:
+`GET '/appointment/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All users were successfully returned.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+{
+  "id": 28,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-01-30T10:00:00.000-05:00",
+  "title": "Something",
+  "description": "none",
+  "origin": "atlanta, ga",
+  "origin_latitude": 33.7489954,
+  "origin_longitude": -84.3879824,
+  "destination": "florida",
+  "destination_latitude": 27.6648274,
+  "destination_longitude": -81.5157535,
+  "distance_filter": 400,
+  "riders": [
+    {
+      "appointment_id": 28,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 2,
+      "distance_from_destination": 455,
+      "rider_role": "Driver"
+    }
+  ]
+}
+```
+
+#### Create Appointment
+
+Creates an appointment for a specified carpool.
+
+Path:
+`POST '/carpool/:id/appointments'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+start | datetime | **Required.** The start time of the appointment in DateTime format. ( DD/MM/YYYY HH:MM:SS )
+title | string | **Required.** Title of the appointment
+description | string | Description of the appointment.
+origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
+destination | string | **Required.** Address of the intended destination.
+distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
+
+**Status Codes**
+
+Code | Type | Description
+--- | --- | ---
+201 | Success | Server has processed the request and has successfully created the appointment.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "start": "15-7-2015 09:00",
+  "title": "Appointment Title",
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "distance_filter": 40
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 30,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-07-15T09:00:00.000-04:00",
+  "title": "Appointment Title",
+  "description": null,
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "origin_latitude": 34.0437521,
+  "origin_longitude": -84.3419778,
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "destination_latitude": 33.7770005,
+  "destination_longitude": -84.36652889999999,
+  "distance_filter": 50,
+  "riders": [
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user23",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 17,
+      "distance_from_destination": 1,
+      "rider_role": "Driver"
+    }
+  ]
+}
+```
+
+#### Update an Appointment
+
+Updates the specified attributes for a specified appointment. Forms should include all required fields to be passed with the request.
+
+Path:
+`PUT '/appointment/:id'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+start | datetime | **Required.** The start time of the appointment in DateTime format. ( DD/MM/YYYY HH:MM:SS )
+title | string | **Required.** Title of the appointment
+description | string | Description of the appointment.
+origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
+destination | string | **Required.** Address of the intended destination.
+distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully updated the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "start": "15-7-2015 19:00",
+  "title": "New Appointment Title",
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 30,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-07-15T19:00:00.000-04:00",
+  "title": "New Appointment Title",
+  "description": null,
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "origin_latitude": 34.0437521,
+  "origin_longitude": -84.3419778,
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "destination_latitude": 33.7770005,
+  "destination_longitude": -84.36652889999999,
+  "distance_filter": 50,
+  "riders": [
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 17,
+      "distance_from_destination": 1,
+      "rider_role": "Driver"
+    }
+  ]
+}
+```
+
+#### Delete Appointment
+
+Deletes a specified appointment.
+
+Path:
+`DELETE '/appointment/:id'`
+
+**Parameters**
+*None*
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+404 | Error | Not Found. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's appointment.
+
+**Example Resonse**
+
+```
+No message is returned.
+```
+
+## Rider Model
+
+This is an individual that is participating in a specific appointment. This can be a user or child. The view for these riders are available in the Appointment model.
+
+#### Join Appointment (User)
+
+Joins a specified user to an appointment. Only the logged in user is allowed to join an appointment. A user cannot add a different user to an appointment. User's rider_role is automatically generated to "Passenger." This can be modified using the update path (below) if desired.
+
+Path: 
+`POST '/user/:username/appointment/:id/join'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Response**
+
+```
+{
+  "id": 30,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-07-15T19:00:00.000-04:00",
+  "title": "New Appointment Title",
+  "description": null,
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "origin_latitude": 34.0437521,
+  "origin_longitude": -84.3419778,
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "destination_latitude": 33.7770005,
+  "destination_longitude": -84.3665289,
+  "distance_filter": 50,
+  "riders": [
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 17,
+      "distance_from_destination": 1,
+      "rider_role": "Driver"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 15,
+        "username": "testuser28",
+        "first_name": "test",
+        "last_name": "user28",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": null,
+        "email": "testuser28@email.com",
+        "avatar": null,
+        "latitude": 33.748994,
+        "longitude": -84.3880503
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Passenger"
+    }
+  ]
+}
+```
+
+#### Join Appointment (Child)
+
+Joins a specified user to an appointment. Only the logged in user is allowed to join an appointment. A user cannot add a different user to an appointment. Child's rider_role is automatically generated to "Passenger".
+
+Path: 
+`POST '/child/:child_id/appointment/:id/join'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+201 | Success | Server has processed the request and has successfully created the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Response**
+```
+{
+  "id": 30,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-07-15T19:00:00.000-04:00",
+  "title": "New Appointment Title",
+  "description": null,
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "origin_latitude": 34.0437521,
+  "origin_longitude": -84.3419778,
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "destination_latitude": 33.7770005,
+  "destination_longitude": -84.3665289,
+  "distance_filter": 50,
+  "riders": [
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 17,
+      "distance_from_destination": 1,
+      "rider_role": "Driver"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 15,
+        "username": "testuser28",
+        "first_name": "test",
+        "last_name": "user28",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": null,
+        "email": "testuser28@email.com",
+        "avatar": null,
+        "latitude": 33.748994,
+        "longitude": -84.3880503
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Passenger"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 15,
+        "username": "testuser28",
+        "first_name": "test",
+        "last_name": "user28",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": null,
+        "email": "testuser28@email.com",
+        "avatar": null,
+        "latitude": 33.748994,
+        "longitude": -84.3880503
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Passenger"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 20,
+        "first_name": "Child",
+        "last_name": "Name",
+        "age": 9,
+        "dob": "2005-12-15",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": "(404) 221-2540",
+        "height": 100,
+        "weight": 100,
+        "latitude": 33.748994,
+        "longitude": -84.3880503,
+        "parent": {
+          "id": 15,
+          "username": "testuser28",
+          "first_name": "test",
+          "last_name": "user28",
+          "address": "206 Washington St SW, Atlanta, GA 30334",
+          "phone_number": null,
+          "email": "testuser28@email.com",
+          "avatar": null,
+          "latitude": 33.748994,
+          "longitude": -84.3880503
+        },
+        "medical": null,
+        "contacts": null
+      },
+      "ridable_type": "Child",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Passenger"
+    }
+  ]
+}
+```
+
+#### Update a User's Rider Role
+
+Allows the user's rider type to change between "Driver" and "Passenger".
+
+Path:
+`PUT '/user/:username/appointment/:id'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+rider_role | string | **Required** The user's role in the appointment, either "Driver" or "Passenger".
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | Server has processed the request and has successfully updated the user.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "rider_role": "Driver"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 30,
+  "carpool_id": 17,
+  "creator": {
+    "id": 11,
+    "username": "testuser23",
+    "first_name": "test",
+    "last_name": "user22",
+    "address": "100 Peachtree St NE Atlanta, GA",
+    "phone_number": "(404) 221-2540",
+    "email": "test23@email.com",
+    "avatar": "http://i.imgur.com/nepC0uk.jpg",
+    "latitude": 33.7868171,
+    "longitude": -84.3827744
+  },
+  "start": "2015-07-15T19:00:00.000-04:00",
+  "title": "New Appointment Title",
+  "description": null,
+  "origin": "10800 Alpharetta Hwy Roswell, GA",
+  "origin_latitude": 34.0437521,
+  "origin_longitude": -84.3419778,
+  "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
+  "destination_latitude": 33.7770005,
+  "destination_longitude": -84.3665289,
+  "distance_filter": 50,
+  "riders": [
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 17,
+      "distance_from_destination": 1,
+      "rider_role": "Driver"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 20,
+        "first_name": "Child",
+        "last_name": "Name",
+        "age": 9,
+        "dob": "2005-12-15",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": "(404) 221-2540",
+        "height": 100,
+        "weight": 100,
+        "latitude": 33.748994,
+        "longitude": -84.3880503,
+        "parent": {
+          "id": 15,
+          "username": "testuser28",
+          "first_name": "test",
+          "last_name": "user28",
+          "address": "206 Washington St SW, Atlanta, GA 30334",
+          "phone_number": null,
+          "email": "testuser28@email.com",
+          "avatar": null,
+          "latitude": 33.748994,
+          "longitude": -84.3880503
+        },
+        "medical": null,
+        "contacts": null
+      },
+      "ridable_type": "Child",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Passenger"
+    },
+    {
+      "appointment_id": 30,
+      "rider": {
+        "id": 15,
+        "username": "testuser28",
+        "first_name": "test",
+        "last_name": "user28",
+        "address": "206 Washington St SW, Atlanta, GA 30334",
+        "phone_number": null,
+        "email": "testuser28@email.com",
+        "avatar": null,
+        "latitude": 33.748994,
+        "longitude": -84.3880503
+      },
+      "ridable_type": "User",
+      "distance_from_origin": 20,
+      "distance_from_destination": 2,
+      "rider_role": "Driver"
+    }
+  ]
+}
+```
+
+#### Remove a User from Appointment
+
+Deletes a user from a specified appointment.
+
+Path: 
+`DELETE '/user/:username/appointment/:id'`
+
+**Parameters**
+*None*
+
+**Status Code**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's appointment.
+
+**Example Response**
+
+```
+No message is returned.
+```
+
+#### Remove a Child from Appointment
+
+Deletes a child from a specified appointment.
+
+Path: 
+`DELETE '/child/:child_id/appointment/:id'`
+
+**Parameters**
+*None*
+
+**Status Code**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's child appointment.
+
+**Example Response**
+
+```
+No message is returned.
 ```
