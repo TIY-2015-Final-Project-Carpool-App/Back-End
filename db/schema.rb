@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715125234) do
+ActiveRecord::Schema.define(version: 20150717023846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "creator_id"
+    t.datetime "start"
+    t.string   "title"
+    t.string   "description"
+    t.string   "origin"
+    t.float    "origin_latitude"
+    t.float    "origin_longitude"
+    t.string   "destination"
+    t.float    "destination_latitude"
+    t.float    "destination_longitude"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "carpool_id"
+    t.integer  "distance_filter"
+  end
 
   create_table "carpools", force: :cascade do |t|
     t.integer  "creator_id"
@@ -77,6 +94,17 @@ ActiveRecord::Schema.define(version: 20150715125234) do
     t.string   "insurance"
     t.string   "religious_preference"
     t.string   "blood_type"
+  end
+
+  create_table "riders", force: :cascade do |t|
+    t.integer  "appointment_id"
+    t.integer  "ridable_id"
+    t.string   "ridable_type"
+    t.integer  "distance_from_origin"
+    t.integer  "distance_from_destination"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "rider_role"
   end
 
   create_table "users", force: :cascade do |t|

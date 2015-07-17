@@ -7,4 +7,6 @@ class Child < ActiveRecord::Base
   belongs_to :user
   has_one :medical
   has_many :contacts, as: :contactable
+  has_many :riders, as: :ridable
+  has_many :appointments, through: :riders
 end
