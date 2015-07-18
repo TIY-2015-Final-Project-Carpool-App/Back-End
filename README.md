@@ -51,6 +51,13 @@
   * [Update a User's Rider Role](#update-a-users-rider-role)
   * [Remove a User from Appointment](#remove-a-user-from-appointment)
   * [Remove a Child from Appointment](#remove-a-child-from-appointment)
+9. [Post Model](#post-model)
+  * [Carpool's Post Index](#carpools-post-index)
+  * [Show a Post](#show-a-post)
+  * [Create a Post](#create-a-post)
+  * [Update a Post](#update-a-post)
+  * [Delete a Post](#delete-a-post)
+
 
 ## **Pagination**
 All request methods that have pagination implemented in its use will will state "***Pagination Enabled***" in its description. If no 'page' or 'per' parameter is specified, the API will automatically apply its default. These parameters are passed in the path as a query or in the JSON request.
@@ -1988,7 +1995,7 @@ Code | Type | Description
 ]
 ```
 
-## Appointment Model
+## **Appointment Model**
 
 #### Carpool Appointment Index
 
@@ -2465,6 +2472,8 @@ Path:
 **Parameters**
 *None*
 
+**Status Codes**
+
 Code | Type | Description
 ---|---|---
 204 | Success | Request was received and deleted successfully.
@@ -2477,7 +2486,7 @@ Code | Type | Description
 No message is returned.
 ```
 
-## Rider Model
+## **Rider Model**
 
 This is an individual that is participating in a specific appointment. This can be a user or child. The view for these riders are available in the Appointment model.
 
@@ -2889,3 +2898,331 @@ Code | Type | Description
 ```
 No message is returned.
 ```
+
+## **Post Model**
+
+#### Carpool's Post Index
+
+List of all posts in a carpool
+
+Path:
+`GET '/carpool/:id/posts'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All posts were successfully returned.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+[
+  {
+    "id": 3,
+    "carpool": {
+      "id": 17,
+      "creator": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "title": "Something",
+      "description": "desc1"
+    },
+    "user": {
+      "id": 15,
+      "username": "testuser28",
+      "first_name": "test",
+      "last_name": "user28",
+      "address": "206 Washington St SW, Atlanta, GA 30334",
+      "phone_number": null,
+      "email": "testuser28@email.com",
+      "avatar": null,
+      "latitude": 33.748994,
+      "longitude": -84.3880503
+    },
+    "urgency": "High",
+    "title": "Post Title1",
+    "body": "I need someone to take me to PostTitle1.",
+    "updated_at": "2015-07-18T00:21:37.713-04:00"
+  },
+  {
+    "id": 4,
+    "carpool": {
+      "id": 17,
+      "creator": {
+        "id": 11,
+        "username": "testuser23",
+        "first_name": "test",
+        "last_name": "user22",
+        "address": "100 Peachtree St NE Atlanta, GA",
+        "phone_number": "(404) 221-2540",
+        "email": "test23@email.com",
+        "avatar": "http://i.imgur.com/nepC0uk.jpg",
+        "latitude": 33.7868171,
+        "longitude": -84.3827744
+      },
+      "title": "Something",
+      "description": "desc1"
+    },
+    "user": {
+      "id": 15,
+      "username": "testuser28",
+      "first_name": "test",
+      "last_name": "user28",
+      "address": "206 Washington St SW, Atlanta, GA 30334",
+      "phone_number": null,
+      "email": "testuser28@email.com",
+      "avatar": null,
+      "latitude": 33.748994,
+      "longitude": -84.3880503
+    },
+    "urgency": "Low",
+    "title": "Post Title2",
+    "body": "Joy Ride!",
+    "updated_at": "2015-07-18T00:22:42.532-04:00"
+  }
+]
+```
+
+#### Show a Post
+
+Shows the attributes of a specified post.
+
+Path: 
+`GET '/post/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+200 | Success | All users were successfully returned.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+{
+  "id": 3,
+  "carpool": {
+    "id": 17,
+    "creator": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "title": "Something",
+    "description": "desc1"
+  },
+  "user": {
+    "id": 15,
+    "username": "testuser28",
+    "first_name": "test",
+    "last_name": "user28",
+    "address": "206 Washington St SW, Atlanta, GA 30334",
+    "phone_number": null,
+    "email": "testuser28@email.com",
+    "avatar": null,
+    "latitude": 33.748994,
+    "longitude": -84.3880503
+  },
+  "urgency": "High",
+  "title": "Post Title1",
+  "body": "I need someone to take me to PostTitle1.",
+  "updated_at": "2015-07-18T00:21:37.713-04:00"
+}
+```
+
+#### Create a Post
+
+Creates a post associated with a specified carpool. Forms should include all required fields to be passed with the request.
+
+Path: 
+`POST '/carpool/:id/posts'`
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+urgency | string | The designated urgency of a post. (Recommended: Low, Medium, High)
+title | string | **Required.** The title of a post.
+body | text | **Required.** The main body of a post.
+
+**Status Codes**
+
+Code | Type | Description
+--- | --- | ---
+201 | Success | Server has processed the request and has successfully created the post.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "title": "School Pickup",
+  "urgency": "Medium",
+  "body": "I need someone to take my child (Bobby) to school on this upcoming Monday."
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 5,
+  "carpool": {
+    "id": 17,
+    "creator": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "title": "Something",
+    "description": "desc1"
+  },
+  "user": {
+    "id": 15,
+    "username": "testuser28",
+    "first_name": "test",
+    "last_name": "user28",
+    "address": "206 Washington St SW, Atlanta, GA 30334",
+    "phone_number": null,
+    "email": "testuser28@email.com",
+    "avatar": null,
+    "latitude": 33.748994,
+    "longitude": -84.3880503
+  },
+  "urgency": "Medium",
+  "title": "School Pickup",
+  "body": "I need someone to take my child (Bobby) to school on this upcoming Monday.",
+  "updated_at": "2015-07-18T00:30:31.675-04:00"
+}
+```
+
+#### Update a Post
+
+Updates the specified attributes for a specified post. Forms should include all required fields to be passed with the request.
+
+Path: 
+`PUT '/post/:id'`
+
+**Parameters**
+
+**Parameters**
+
+Name | Type | Description
+--- | --- | ---
+urgency | string | The designated urgency of a post. (Recommended: Low, Medium, High)
+title | string | **Required.** The title of a post.
+body | text | **Required.** The main body of a post.
+
+**Status Codes**
+
+Code | Type | Description
+--- | --- | ---
+200 | Success | Server has processed the request and has successfully updated the post.
+422 | Error | Unprocessable Entry. Specified parameters are invalid.
+
+**Example Input**
+
+```
+{
+  "urgency": "High",
+  "body": "I need someone to take my child (Bobby) to school on this upcoming Monday. (IT'S TOMORROW NOW!!! PLEASE!)"
+}
+```
+
+**Example Response**
+
+```
+{
+  "id": 5,
+  "carpool": {
+    "id": 17,
+    "creator": {
+      "id": 11,
+      "username": "testuser23",
+      "first_name": "test",
+      "last_name": "user22",
+      "address": "100 Peachtree St NE Atlanta, GA",
+      "phone_number": "(404) 221-2540",
+      "email": "test23@email.com",
+      "avatar": "http://i.imgur.com/nepC0uk.jpg",
+      "latitude": 33.7868171,
+      "longitude": -84.3827744
+    },
+    "title": "Something",
+    "description": "desc1"
+  },
+  "user": {
+    "id": 15,
+    "username": "testuser28",
+    "first_name": "test",
+    "last_name": "user28",
+    "address": "206 Washington St SW, Atlanta, GA 30334",
+    "phone_number": null,
+    "email": "testuser28@email.com",
+    "avatar": null,
+    "latitude": 33.748994,
+    "longitude": -84.3880503
+  },
+  "urgency": "High",
+  "title": "School Pickup",
+  "body": "I need someone to take my child (Bobby) to school on this upcoming Monday. (IT'S TOMORROW NOW!!! PLEASE!)",
+  "updated_at": "2015-07-18T00:35:11.458-04:00"
+}
+```
+
+#### Delete a Post
+
+Deletes a specified post.
+
+Path:
+`DELETE '/post/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+404 | Error | Not Found. Specified parameters do not match.
+
+**Example Response**
+
+```
+No message returned.
+```
+
+
