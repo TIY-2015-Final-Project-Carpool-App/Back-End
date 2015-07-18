@@ -45,6 +45,9 @@ gem 'httparty'
 # Add Geocoder to obtain latitude/longitude for users
 gem 'geocoder'
 
+# Mandrill for transactional emails
+gem 'mandrill-api'
+
 group :development, :test do
 	# Development debugging
 	gem 'pry'
