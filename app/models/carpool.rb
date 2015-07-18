@@ -5,6 +5,7 @@ class Carpool < ActiveRecord::Base
   has_many :users, through: :joined_carpools
   belongs_to :creator, class_name: "User", foreign_key: :creator_id
   has_many :appointments, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   def join_emails(emails)
     binding.pry

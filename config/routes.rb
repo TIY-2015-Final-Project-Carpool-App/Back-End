@@ -60,4 +60,11 @@ Rails.application.routes.draw do
   delete 'user/:username/appointment/:id', to: 'riders#delete_user'       # Removes a user from an appointment
   delete 'child/:child_id/appointment/:id', to: 'riders#delete_child'     # Removes a child from an appointment
 
+  # Posts
+  get 'carpool/:id/posts', to: 'posts#index'    # Index of a carpool's index
+  get 'post/:id', to: 'posts#show'              # Show a specific post
+  post 'carpool/:id/posts', to: 'posts#create'  # Creates a post on a carpool
+  put 'post/:id', to: 'posts#update'            # Updates a post on a carpool
+  delete 'post/:id', to: 'posts#delete'         # Deletes a post on a carpool
+
 end

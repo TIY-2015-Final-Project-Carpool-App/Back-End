@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :created_appointments, class_name: "Appointment", foreign_key: :creator_id
   has_many :riders, as: :ridable
   has_many :appointments, through: :riders
+  has_many :posts, dependent: :destroy
 
   def ensure_access_token
   	if self.access_token.blank?
