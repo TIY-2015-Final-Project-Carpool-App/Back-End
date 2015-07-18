@@ -28,7 +28,7 @@ class AppointmentsController < ApplicationController
   # Need to add restrictions to creation of appointments to users verified in the group only
   def create
     attributes = set_attributes(params)
-    @carpool = Carpool.find_by(id: params[:id])
+    @carpool = Carpool.find(params[:id])
     @appointment = current_user.created_appointments.new(attributes)
     @appointment.carpool_id = @carpool.id
     if @appointment.save
@@ -41,36 +41,28 @@ class AppointmentsController < ApplicationController
 
   def update
     attributes = set_attributes(params)
-    @appointment = Appointment.find_by(id: params[:id])
-    if @appointment
-      if current_user.access_token == @appointment.creator.access_token
-        if @appointment.update(attributes)
-          render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
-        else
-          render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
-        end
+    @appointment = Appointment.find(params[:id])
+    if current_user.access_token == @appointment.creator.access_token
+      if @appointment.update(attributes)
+        render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
       else
-        render json: { errors: "Unauthorized access. Must be the creator to update." }, status: :unauthorized
+        render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { errors: "No appointment found with specified ID." }, status: :bad_request
+      render json: { errors: "Unauthorized access. Must be the creator to update." }, status: :unauthorized
     end
   end
 
   def delete
-    @appointment = Appointment.find_by(id: params[:id])
-    if @appointment
-      if current_user.access_token == @appointment.creator.access_token
-        if @appointment.destroy
-          render json: { message: "Appointment deleted." }, status: :no_content
-        else
-          render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
-        end
+    @appointment = Appointment.find(params[:id])
+    if current_user.access_token == @appointment.creator.access_token
+      if @appointment.destroy
+        render json: { message: "Appointment deleted." }, status: :no_content
       else
-        render json: { errors: "Unauthorized access. Must be the creator to delete." }, status: :unauthorized
+        render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { errors: "No appointment found with specified ID." }, status: :bad_request
+      render json: { errors: "Unauthorized access. Must be the creator to delete." }, status: :unauthorized
     end
   end
 
