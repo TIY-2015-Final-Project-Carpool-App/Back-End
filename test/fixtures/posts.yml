@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  carpool_id: 1
+  user_id: 1
+  urgency: MyString
+  title: MyString
+  body: MyText
+
+two:
+  carpool_id: 1
+  user_id: 1
+  urgency: MyString
+  title: MyString
+  body: MyText
