@@ -51,6 +51,12 @@ gem 'mandrill-api', require: 'mandrill'
 # Resque for queueing background jobs, specifiy version for Heroku
 gem 'resque', "~> 1.22.0"
 
+# Resque Scheduler to allow queueing of jobs in the future
+# gem 'resque-scheduler', require: 'resque_scheduler/tasks'
+
+# Clockwork scheduler to allow queueing of jobs in the future
+# gem 'clockwork'
+
 group :development, :test do
 	# Development debugging
 	gem 'pry'

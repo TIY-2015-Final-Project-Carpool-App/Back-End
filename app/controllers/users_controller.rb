@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 		attributes = set_attributes(params)
 		@user = User.new(attributes)
 		if @user.save
-      UserMailer.registration_email(@user).deliver
+      # UserMailer.registration_email(@user).deliver
+      Resque.enqueue(RegistrationEmailJob.new(@user))
 			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
 										:last_name, :address, :phone_number, :email, :avatar, :access_token, 
                     :latitude, :longitude]) }, 
