@@ -427,7 +427,7 @@ first_name | string | **Required.** Child's first name.
 last_name | string | **Required.** Child's last name.
 age | integer | Child's current age.
 dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
-address | string | Child's location to be picked up and dropped off.
+address | string | **Required.** Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).
@@ -544,7 +544,7 @@ first_name | string | **Required.** Child's first name.
 last_name | string | **Required.** Child's last name.
 age | integer | Child's current age.
 dob | string | Child's date of birth. If this parameter is used, the DD/MM/YYYY format **must** be used. The response for this parameter will be returned in the YYYY-MM-DD format.
-address | string | Child's location to be picked up and dropped off.
+address | string | **Required.** Child's location to be picked up and dropped off.
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).

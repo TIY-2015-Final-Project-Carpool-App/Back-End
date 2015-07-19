@@ -1,5 +1,5 @@
 class Child < ActiveRecord::Base
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :address, presence: true
 
   geocoded_by :address
   after_validation :geocode
