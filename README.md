@@ -131,7 +131,7 @@ Code | Type | Description
 
 #### Register User
 
-Allows the registration of a new user.
+Allows the registration of a new user. When a new user is created, they will not be activated until their email is confirmed. If the email is not confirmed, they will not be able to use the login route, and will not be given an access token.
 
 Path:
 `POST '/users'`
@@ -168,8 +168,6 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
-  "latitude": 35.7719376,
-  "longitude": 139.7156425
 }
 ```
 
@@ -177,17 +175,7 @@ Code | Type | Description
 
 ```
 {
-  "id": 1,
-  "username": "LilDebbie",
-  "first_name": "Lil",
-  "last_name": "Debbie",
-  "address": "10260 McKee Road, Collegedale, TN 37315",
-  "phone_number": "800-522-4499",
-  "email": "lil@debbie.com",
-  "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
-  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29",
-  "latitude": 35.7719376,
-  "longitude": 139.7156425
+  "message": "User created, please check provided email address for activation."
 }
 ```
 
@@ -218,6 +206,7 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "activated": true,
   "latitude": 35.7719376,
   "longitude": 139.7156425
 }
@@ -277,6 +266,7 @@ Code | Type | Description
   "phone_number": "800-522-4499",
   "email": "lil@debbie.com",
   "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+  "activated": true,
   "latitude": 35.7719376,
   "longitude": 139.7156425
 }
@@ -284,7 +274,7 @@ Code | Type | Description
 
 #### User Login
 
-Allows the login of a user to supply an access token.
+Allows the login of a user to supply an access token. Will not be available if the user has not confirmed their email.
 
 Path: 
 `POST '/users/login'`
@@ -319,7 +309,10 @@ Code | Type | Description
   "id": 1
   "username": "LilDebbie",
   "email": "lil@debbie.com",
-  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29"
+  "access_token": "1af17e73721dbe0c40011b82ed4bb1a7dbe3ce29",
+  "activated": true,
+  "latitude": 35.7719376,
+  "longitude": 139.7156425
 }
 ```
 
@@ -388,7 +381,8 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true
     }
   },
   {
@@ -411,7 +405,8 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true
     }
   }
 ]
@@ -482,7 +477,8 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "activated": true
   }
 }
 ```
@@ -527,7 +523,8 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "activated": true
   }
 }
 ```
@@ -597,7 +594,8 @@ Code | Type | Description
     "address": "10260 McKee Road, Collegedale, TN 37315",
     "phone_number": "800-522-4499",
     "email": "lil@debbie.com",
-    "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+    "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+    "activated": true
   }
 }
 ```
@@ -670,7 +668,8 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true
     }
   },
   "conditions": "Diabetes, Eczema",
@@ -747,7 +746,8 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true
     }
   },
   "conditions": "Diabetes, Eczema",
@@ -822,7 +822,8 @@ Code | Type | Description
       "address": "10260 McKee Road, Collegedale, TN 37315",
       "phone_number": "800-522-4499",
       "email": "lil@debbie.com",
-      "avatar": "https://i.imgur.com/KOoBDaKb.jpg"
+      "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+      "activated": true
     }
   },
   "conditions": "Eczema",
@@ -1190,9 +1191,9 @@ Code | Type | Description
         "phone_number": "800-522-4499",
         "email": "lil@debbie.com",
         "avatar": "https://i.imgur.com/KOoBDaKb.jpg",
+        "activated": true,
         "latitude": 35.7719376,
         "longitude": 139.7156425,
-        "activated": true,
         "join_token": null
       }
     ]
@@ -1208,6 +1209,7 @@ Code | Type | Description
       "phone_number": "800-876-3942",
       "email": "twinkie@hostess.com",
       "avatar": "",
+      "activated": true,
       "latitude": 35.7719376,
       "longitude": 139.7156425
     },

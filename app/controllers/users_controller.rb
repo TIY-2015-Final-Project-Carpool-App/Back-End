@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 		attributes = set_attributes(params)
 		if current_user.access_token == @user.access_token
 			if @user.update(attributes)
-				render partial: 'user', status: :ok
+				render partial: 'user', locals: { user: @user }, status: :ok
 			else
 				render json: { errors: "There was an issue with the specified field entries." }, 
 				 							status: :unprocessable_entity
@@ -65,9 +65,10 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find_by!(username: params[:username])
-		render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-									:last_name, :address, :phone_number, :email, :avatar, 
-                  :latitude, :longitude])}, status: :ok
+    render partial: 'user', locals: { user: @user }, status: :ok
+		# render json: { user: @user.as_json(only: [:id, :username, :first_name, 
+		# 							:last_name, :address, :phone_number, :email, :avatar, 
+  #                 :latitude, :longitude])}, status: :ok
 	end
 
   def activate
