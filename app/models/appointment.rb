@@ -10,9 +10,12 @@ class Appointment < ActiveRecord::Base
   def set_coordinates
     origin_coord = Geocoder.coordinates(self.origin)
     destination_coord = Geocoder.coordinates(self.destination)
-    self.origin_latitude = origin_coord.first
-    self.origin_longitude = origin_coord.last
-    self.destination_latitude = destination_coord.first
-    self.destination_longitude = destination_coord.last
+    attributes = {
+      origin_latitude: origin_coord.first,
+      origin_longitude: origin_coord.last,
+      destination_latitude: destination_coord.first
+      destination_longitude: destination_coord.last
+    }
+    self.update(attributes)
   end
 end
