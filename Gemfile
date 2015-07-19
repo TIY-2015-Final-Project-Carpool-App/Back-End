@@ -46,7 +46,7 @@ gem 'httparty'
 gem 'geocoder'
 
 # Mandrill for transactional emails
-gem 'mandrill-api'
+gem 'mandrill-api', require: 'mandrill'
 
 group :development, :test do
 	# Development debugging
