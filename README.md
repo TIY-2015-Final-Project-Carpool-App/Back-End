@@ -145,7 +145,7 @@ password | string | **Required.** Password provided must be at least 6 character
 first_name | string | **Required.** First name of the user.
 last_name | string | **Required.** Last name of the user.
 email | string | **Required.** User's contact email.
-address | string | **Optional.** Address of the user's desired location.
+address | string | **Required.** Address of the user's desired location.
 phone_number | string | **Optional.** User's contact number.
 avatar | string | **Optional.** User's profile picture image link.
 
@@ -239,7 +239,7 @@ password | string | **Required.** Password provided must be at least 6 character
 first_name | string | **Required.** First name of the user.
 last_name | string | **Required.** Last name of the user.
 email | string | **Required.** User's contact email.
-address | string | **Optional.** Address of the user's desired location.
+address | string | **Required.** Address of the user's desired location.
 phone_number | string | **Optional.** User's contact number.
 avatar | string | **Optional.** User's profile picture image link.
 
