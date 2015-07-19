@@ -10,36 +10,37 @@ class UsersController < ApplicationController
 		attributes = set_attributes(params)
 		@user = User.new(attributes)
 		if @user.save
-			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-										:last_name, :address, :phone_number, :email, :avatar, :access_token, 
-                    :latitude, :longitude]) }, 
-                    status: :created
+      UserMailer.registration_email(@user).deliver
+      render json: { message: "User created, please check provided email address for activation." }, 
+                     status: :created
+			# render json: { user: @user.as_json(only: [:id, :username, :first_name, 
+			# 							:last_name, :address, :phone_number, :email, :avatar, :access_token, 
+   #                  :latitude, :longitude]) }, 
+   #                  status: :created
 		else
 			render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
 		end
 	end
 
 	def login
-		@user = User.find_by(username: params[:username])
+		@user = User.find_by!(username: params[:username])
 		pass_hash = Digest::SHA1.hexdigest(params[:password])
- 		if @user && pass_hash == @user.password
-      render json: { user: @user.as_json(only: [:id, :username, :email, :access_token, 
+ 		if pass_hash == @user.password && @user.activated
+      render json: { user: @user.as_json(only: [:id, :username, :email, :access_token, :activated, 
                      :latitude, :longitude]) },
         status: :created
     else
-      render json: { message: "Invalid login or password." },
+      render json: { message: "Invalid login/password or user has not been activated." },
         status: :unauthorized
     end
 	end
 
 	def update
-		@user = User.find_by(username: params[:username])
+		@user = User.find_by!(username: params[:username])
 		attributes = set_attributes(params)
 		if current_user.access_token == @user.access_token
 			if @user.update(attributes)
-				render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-											:last_name, :address, :phone_number, :email, :avatar, 
-                      :latitude, :longitude]) }, status: :ok
+				render partial: 'user', locals: { user: @user }, status: :ok
 			else
 				render json: { errors: "There was an issue with the specified field entries." }, 
 				 							status: :unprocessable_entity
@@ -50,7 +51,7 @@ class UsersController < ApplicationController
 	end
 
 	def delete
-		@user = User.find_by(username: params[:username])
+		@user = User.find_by!(username: params[:username])
 		if current_user.access_token == @user.access_token
 			if @user.destroy
 			  render json: { message: "Account Deleted." }, status: :no_content
@@ -63,15 +64,28 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find_by(username: params[:username])
-		if @user
-			render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-										:last_name, :address, :phone_number, :email, :avatar, 
-                    :latitude, :longitude])}, status: :ok
-		else
-			render json: { error: @user.errors.full_messages }, status: :bad_request
-		end
+		@user = User.find_by!(username: params[:username])
+    render partial: 'user', locals: { user: @user }, status: :ok
+		# render json: { user: @user.as_json(only: [:id, :username, :first_name, 
+		# 							:last_name, :address, :phone_number, :email, :avatar, 
+  #                 :latitude, :longitude])}, status: :ok
 	end
+
+  def activate
+    @user = User.find_by!(username: params[:username])
+    if params[:activate_token] == @user.activate_token
+      if @user.update(activated: true)
+        render json: { user: @user.as_json(only: [:id, :username, :first_name, 
+                    :last_name, :address, :phone_number, :email, :avatar, :access_token, 
+                    :latitude, :longitude]) }, 
+                    status: :ok
+      else
+        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      end
+    else
+      render json: { errors: "Incorrect token." }, status: :bad_request
+    end
+  end
 
 	private
 

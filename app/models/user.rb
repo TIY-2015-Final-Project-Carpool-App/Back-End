@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
 	EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   
 	validates :username, presence: true, uniqueness: true
-	validates :first_name, :last_name, presence: true 
+	validates :first_name, :last_name, :address, presence: true 
 	validates :password, presence: true, length: { minimum: 6 }
   validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX,
   														            message: "provided is not a valid email." }
 
-  before_validation :ensure_access_token, :downcase_email
+  before_validation :ensure_access_token, :downcase_email, :ensure_activate_token
   geocoded_by :address
   after_validation :geocode
 
@@ -45,5 +45,19 @@ class User < ActiveRecord::Base
     if self.email
       self.email = self.email.downcase
     end
+  end
+
+  def ensure_activate_token
+    if self.activate_token.blank?
+      self.activate_token = User.generate_activate_token
+    end
+  end
+
+  def self.generate_activate_token
+    token = SecureRandom.hex
+    while User.exists?(activate_token: token)
+      token = SecureRandom.hex
+    end
+    token
   end
 end

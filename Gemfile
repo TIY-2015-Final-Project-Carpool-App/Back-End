@@ -45,6 +45,12 @@ gem 'httparty'
 # Add Geocoder to obtain latitude/longitude for users
 gem 'geocoder'
 
+# Mandrill for transactional emails
+gem 'mandrill-api', require: 'mandrill'
+
+# Resque for queueing background jobs, specifiy version for Heroku
+gem 'resque', "~> 1.22.0"
+
 group :development, :test do
 	# Development debugging
 	gem 'pry'
