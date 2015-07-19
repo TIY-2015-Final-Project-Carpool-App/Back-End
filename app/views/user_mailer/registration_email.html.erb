@@ -7,7 +7,7 @@
     <h1>Welcome to the Convoy App, <%= @user.first_name %></h1>
     <p>
       Please confirm your email through this link:
-      <a href=<%= "http://www.google.com" %>><%= "http://www.google.com" %></a>
+      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/user/#{@user.username}/activate?activate_token=#{@user.activate_token}" %>><%= "http://convoyappthingy.com/activate" %></a>
     </p>
   </body>
 </html>

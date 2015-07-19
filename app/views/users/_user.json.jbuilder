@@ -6,5 +6,6 @@ json.address user.address
 json.phone_number user.phone_number
 json.email user.email
 json.avatar user.avatar
+json.activated user.activated
 json.latitude user.latitude
 json.longitude user.longitude
