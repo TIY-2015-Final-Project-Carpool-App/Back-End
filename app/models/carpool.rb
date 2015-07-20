@@ -8,7 +8,6 @@ class Carpool < ActiveRecord::Base
   has_many :posts, dependent: :destroy
 
   def join_emails(emails)
-    binding.pry
     # @carpool = current_user.created_carpools.find(params[:id])
     ActiveRecord::Base.transaction do
       emails.each do |email|
