@@ -3,20 +3,20 @@ class AppointmentsController < ApplicationController
   def index_carpool
     @carpool = Carpool.find(params[:id])
     @appointments = @carpool.appointments
-    if @appointments.empty?
-      render json: { errors: "No appointments found on specifed carpool ID." }, status: :bad_request
-    else
+    unless @appointments.empty?
       render 'index.json.jbuilder', locals: { appointments: @appointments }, status: :ok
+    else
+      render json: { errors: "No appointments found on specifed carpool ID." }, status: :bad_request
     end
   end
 
   def index_user
     @user = User.find_by!(username: params[:username])
     @riders = @user.riders
-    if @riders.empty?
-      render json: { errors: "No appointments found for specified user." }, status: :bad_request
-    else
+    unless @riders.empty?
       render 'riders/rider_index.json.jbuilder', locals: { riders: @riders }, status: :ok
+    else
+      render json: { errors: "No appointments found for specified user." }, status: :bad_request
     end
   end
 
@@ -41,28 +41,20 @@ class AppointmentsController < ApplicationController
 
   def update
     attributes = set_attributes(params)
-    @appointment = Appointment.find(params[:id])
-    if current_user.access_token == @appointment.creator.access_token
-      if @appointment.update(attributes)
-        render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
-      else
-        render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
-      end
+    @appointment = current_user.created_appointments.find(params[:id])
+    if @appointment.update(attributes)
+      render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
     else
-      render json: { errors: "Unauthorized access. Must be the creator to update." }, status: :unauthorized
+      render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def delete
-    @appointment = Appointment.find(params[:id])
-    if current_user.access_token == @appointment.creator.access_token
-      if @appointment.destroy
-        render json: { message: "Appointment deleted." }, status: :no_content
-      else
-        render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
-      end
+    @appointment = current_user.created_appointments.find(params[:id])
+    if @appointment.destroy
+      render json: { message: "Appointment deleted." }, status: :no_content
     else
-      render json: { errors: "Unauthorized access. Must be the creator to delete." }, status: :unauthorized
+      render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -72,7 +64,8 @@ class AppointmentsController < ApplicationController
     attributes = { }
     list = [
       :start, :title, :description,
-      :origin, :destination, :distance_filter
+      :origin, :destination, :distance_filter,
+      :seats
     ]
     list.each do |l|
       if params[l]

@@ -23,12 +23,12 @@ Rails.application.routes.draw do
   delete 'child/:id/medical', to: 'medicals#delete'    # Delete medical information for a child
 
   # Contacts Model
-  get 'child/:id/contacts', to: 'contacts#index'              # Index of contacts for a user
-  get 'user/:username/contacts', to: 'contacts#index'         # Index of contacts for a child
-  post 'child/:id/contacts', to: 'contacts#create'            # Create a contact for a child
-  post 'users/contacts', to: 'contacts#create'                # Create a contact for the current user
-  put 'contact/:id', to: 'contacts#update'                    # Update a contact
-  delete 'contact/:id', to: 'contacts#delete'                 # Deletes a contact by ID
+  get 'child/:id/contacts', to: 'contacts#index'        # Index of contacts for a user
+  get 'user/:username/contacts', to: 'contacts#index'   # Index of contacts for a child
+  post 'child/:id/contacts', to: 'contacts#create'      # Create a contact for a child
+  post 'users/contacts', to: 'contacts#create'          # Create a contact for the current user
+  put 'contact/:id', to: 'contacts#update'              # Update a contact
+  delete 'contact/:id', to: 'contacts#delete'           # Deletes a contact by ID
 
   # Carpool Model
   get 'carpools', to: 'carpools#index'                        # Index of all carpools
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get 'user/:username/invites', to: 'carpools#invites'        # Index of carpools that are pending activation
   post 'carpool/:id', to: 'carpools#join'                     # Invites a user to a specific carpool
   put 'carpool/:id/activate', to: 'carpools#activate'         # Activates current user to a carpool group
-  # delete 'invite/:id', to: 'carpool#remove_invite'            # Declines an invite to a carpool group
+  # delete 'invite/:id', to: 'carpool#remove_invite'          # Declines an invite to a carpool group
 
   # Appointments
   get 'carpool/:id/appointments', to: 'appointments#index_carpool'  # Index of appointments in a carpool
