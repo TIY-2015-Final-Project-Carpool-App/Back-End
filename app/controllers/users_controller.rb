@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 		attributes = set_attributes(params)
 		@user = User.new(attributes)
 		if @user.save
-      UserMailer.registration_email(@user).deliver
+       # UserMailer.registration_email(@user).deliver
+      RegistrationEmailJob.perform_later(@user)
       render json: { message: "User created, please check provided email address for activation." }, 
                      status: :created
 			# render json: { user: @user.as_json(only: [:id, :username, :first_name, 
