@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  before_action :authenticate_with_token!
 
   def index_carpool
     @carpool = Carpool.find(params[:id])

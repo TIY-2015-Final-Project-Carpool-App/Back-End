@@ -1,6 +1,8 @@
 class Rider < ActiveRecord::Base
   validates :rider_role, presence: true
   validates_numericality_of :distance_from_origin, less_than_or_equal_to: :filter
+  validates :ridable_id, uniqueness: { scope: [:appointment_id, :ridable_type], 
+              message: "cannot join a single appointment more than once." }
 
   belongs_to :appointment
   belongs_to :ridable, polymorphic: true
