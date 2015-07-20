@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get 'user/:username/invites', to: 'carpools#invites'        # Index of carpools that are pending activation
   post 'carpool/:id', to: 'carpools#join'                     # Invites a user to a specific carpool
   put 'carpool/:id/activate', to: 'carpools#activate'         # Activates current user to a carpool group
-  # delete 'invite/:id', to: 'carpool#remove_invite'          # Declines an invite to a carpool group
+  delete 'invite/:id', to: 'carpool#remove_invite'            # Declines an invite to a carpool group
 
   # Appointments
   get 'carpool/:id/appointments', to: 'appointments#index_carpool'  # Index of appointments in a carpool

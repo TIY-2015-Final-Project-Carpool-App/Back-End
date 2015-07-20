@@ -87,6 +87,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_invite
+    
+  end
+
 	private
 
 	def set_attributes(params)
