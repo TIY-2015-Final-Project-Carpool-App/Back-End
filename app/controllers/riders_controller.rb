@@ -1,4 +1,5 @@
 class RidersController < ApplicationController
+  before_action :authenticate_with_token!
 
   def create_user
     @appointment = Appointment.find(params[:id])
@@ -18,17 +19,13 @@ class RidersController < ApplicationController
 
   def create_child
     @appointment = Appointment.find(params[:id])
-    @child = Child.find(params[:child_id])
-    if current_user.access_token == @child.user.access_token
-      @rider = @child.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
-      if @rider.save
-        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
-               status: :created
-      else
-        render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
-      end
+    @child = current_user.children.find(params[:child_id])
+    @rider = @child.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
+    if @rider.save
+      render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+             status: :created
     else
-      render json: { errors: "Unauthorized access." }, status: :unauthorized
+      render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

@@ -13,6 +13,7 @@ json.destination appointment.destination
 json.destination_latitude appointment.destination_latitude
 json.destination_longitude appointment.destination_longitude
 json.distance_filter appointment.distance_filter
+json.seats appointment.seats
 json.riders do 
   json.array! appointment.riders do |rider| 
     json.partial! 'riders/rider', rider: rider

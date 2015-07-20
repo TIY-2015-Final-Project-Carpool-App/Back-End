@@ -2178,6 +2178,7 @@ Code | Type | Description
     "destination_latitude": 27.6648274,
     "destination_longitude": -81.5157535,
     "distance_filter": 400,
+    "seats": 4,
     "riders": [
       {
         "appointment_id": 28,
@@ -2265,6 +2266,7 @@ Code | Type | Description
   "destination_latitude": 27.6648274,
   "destination_longitude": -81.5157535,
   "distance_filter": 400,
+  "seats": 4,
   "riders": [
     {
       "appointment_id": 28,
@@ -2306,6 +2308,7 @@ description | string | Description of the appointment.
 origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
 destination | string | **Required.** Address of the intended destination.
 distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
+seat | integer | Number of seats available in the driver's vehicle (without including the user).
 
 **Status Codes**
 
@@ -2322,7 +2325,8 @@ Code | Type | Description
   "title": "Appointment Title",
   "origin": "10800 Alpharetta Hwy Roswell, GA",
   "destination": "650 Ponce De Leon Ave NE Atlanta, GA",
-  "distance_filter": 40
+  "distance_filter": 40,
+  "seats": 4
 }
 ```
 
@@ -2354,6 +2358,7 @@ Code | Type | Description
   "destination_latitude": 33.7770005,
   "destination_longitude": -84.36652889999999,
   "distance_filter": 50,
+  "seats": 4,
   "riders": [
     {
       "appointment_id": 30,
@@ -2395,6 +2400,7 @@ description | string | Description of the appointment.
 origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
 destination | string | **Required.** Address of the intended destination.
 distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
+seat | integer | Number of seats available in the driver's vehicle (without including the user).
 
 **Status Codes**
 
@@ -2440,6 +2446,7 @@ Code | Type | Description
   "destination_latitude": 33.7770005,
   "destination_longitude": -84.36652889999999,
   "distance_filter": 50,
+  "seats": 4
   "riders": [
     {
       "appointment_id": 30,
@@ -2537,6 +2544,7 @@ Code | Type | Description
   "destination_latitude": 33.7770005,
   "destination_longitude": -84.3665289,
   "distance_filter": 50,
+  "seats": 4,
   "riders": [
     {
       "appointment_id": 30,
@@ -2624,6 +2632,7 @@ Code | Type | Description
   "destination_latitude": 33.7770005,
   "destination_longitude": -84.3665289,
   "distance_filter": 50,
+  "seats": 4,
   "riders": [
     {
       "appointment_id": 30,
@@ -2776,6 +2785,7 @@ Code | Type | Description
   "destination_latitude": 33.7770005,
   "destination_longitude": -84.3665289,
   "distance_filter": 50,
+  "seats": 4,
   "riders": [
     {
       "appointment_id": 30,
