@@ -3,6 +3,9 @@ class CarpoolMailer < ApplicationMailer
   layout 'mailer'
 
   def join_email(join)
-
+    @joined = joined
+    @carpool = joined.carpool
+    @user = joined.user
+    mail(to: @user.email, subject: "You've been invited to a carpool!")
   end
 end
