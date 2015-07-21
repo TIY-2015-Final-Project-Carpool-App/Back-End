@@ -10,13 +10,11 @@ class UsersController < ApplicationController
 		attributes = set_attributes(params)
 		@user = User.new(attributes)
 		if @user.save
-      UserMailer.registration_email(@user).deliver
+       # UserMailer.registration_email(@user).deliver
+      # RegistrationEmailJob.set(wait: 5.minute).perform_later(@user)
+      RegistrationEmailJob.perform_later(@user)
       render json: { message: "User created, please check provided email address for activation." }, 
                      status: :created
-			# render json: { user: @user.as_json(only: [:id, :username, :first_name, 
-			# 							:last_name, :address, :phone_number, :email, :avatar, :access_token, 
-   #                  :latitude, :longitude]) }, 
-   #                  status: :created
 		else
 			render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
 		end
