@@ -52,10 +52,13 @@ gem 'mandrill-api', require: 'mandrill'
 gem 'resque', "~> 1.22.0"
 
 # Resque Scheduler to allow queueing of jobs in the future
-# gem 'resque-scheduler', require: 'resque_scheduler/tasks'
+gem 'resque-scheduler'
 
 # Clockwork scheduler to allow queueing of jobs in the future
 # gem 'clockwork'
+
+# RedisToGo for Heroku background workers
+gem 'redis'
 
 group :development, :test do
 	# Development debugging
