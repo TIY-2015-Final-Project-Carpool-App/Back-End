@@ -1,4 +1,5 @@
 class CarpoolsController < ApplicationController
+  before_action :authenticate_with_token!
 
   def index
     if params[:username]
