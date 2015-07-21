@@ -38,6 +38,7 @@
   * [User's Pending Invitations Index](#users-pending-invitations-index)
   * [Invite a User to Carpool](#invite-a-user-to-carpool)
   * [Activate an Invitation](#activate-an-invitation)
+  * [Decline an Invitation](#decline-an-invitation)
 7. [Appointment Model](#appointment-model)
   * [Carpool Appointment Index](#carpool-appointment-index)
   * [User Appointment Index](#user-appointment-index)
@@ -1995,6 +1996,30 @@ Code | Type | Description
     }
   }
 ]
+```
+
+#### Decline an Invitation
+
+Removes an invitation (and user) from a carpool.
+
+Path: 
+`DELETE '/invite/:id'`
+
+**Parameters**
+*None*
+
+**Status Codes**
+
+Code | Type | Description
+---|---|---
+204 | Success | Request was received and deleted successfully.
+400 | Error | Bad Request. Specified parameters do not match.
+401 | Error | Unauthorized. A different user is not authorized to delete another user's invitation.
+
+**Example Response**
+
+```
+No message is returned.
 ```
 
 ## **Appointment Model**
