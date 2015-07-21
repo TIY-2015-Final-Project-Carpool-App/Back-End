@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have been invited to a Carpool <%= @user.first_name %>!</h1>
+    <br/>
+    <h3>Carpool Name: <%= @carpool.title %></h3>
+    <p>Created by: <%= @carpool.creator.email %></p>
+    <br/>  
+    <p>
+      To accept the invitation:
+      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/user/#{@user.username}/carpool/#{@carpool.id}/activate?join_token=#{@joined.join_token}" %>><%= "Accept" %></a>
+    </p>
+    <br/>
+    <p>
+      To decline the invitation:
+      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/user/#{@user.username}/carpool/#{@carpool.id}/decline?join_token=#{@joined.join_token}" %>><%= Decline %></a>
+    </p>
+  </body>
+</html>
