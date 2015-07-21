@@ -2000,7 +2000,7 @@ Code | Type | Description
 
 #### Decline an Invitation
 
-Removes an invitation (and user) from a carpool.
+Removes an invitation (and user) from a carpool. This route can be used to remove a user from a carpool group as well.
 
 Path: 
 `DELETE '/invite/:id'`
