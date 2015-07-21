@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    render partial: 'post', locals: { post: @post }, status: :ok
+    render partial: 'post.json.jbuilder', locals: { post: @post }, status: :ok
   end
 
   def create
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(attributes)
     @carpool.posts << @post
     if @post.save
-      render partial: 'post', locals: { post: @post }, status: :created
+      render partial: 'post.json.jbuilder', locals: { post: @post }, status: :created
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     attributes = set_attributes(params)
     if @post.update(attributes)
-      render partial: 'post', locals: { post: @post }, status: :ok
+      render partial: 'post.json.jbuilder', locals: { post: @post }, status: :ok
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
