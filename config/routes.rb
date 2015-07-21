@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   # Carpool Model
   get 'carpools', to: 'carpools#index'                        # Index of all carpools
-  get 'user/:username/carpools', to: 'carpools#index'         # Index of carpools that a user has joined or been invited to
+  get 'user/:username/carpools', to: 'carpools#user_index'    # Index of carpools that a user has joined or been invited to
   get 'carpool/:id', to: 'carpools#show'                      # Show a carpool
   # get 'carpool/:id/users', to: 'carpools#users'             # Index of users that joined a specific carpool
   post 'carpools', to: 'carpools#create'                      # Create a carpool
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get 'user/:username/invites', to: 'carpools#invites'        # Index of carpools that are pending activation
   post 'carpool/:id', to: 'carpools#join'                     # Invites a user to a specific carpool
   put 'carpool/:id/activate', to: 'carpools#activate'         # Activates current user to a carpool group
-  # delete 'invite/:id', to: 'carpool#remove_invite'          # Declines an invite to a carpool group
+  delete 'invite/:id', to: 'carpools#remove_invite'           # Declines an invite to a carpool group
 
   # Appointments
   get 'carpool/:id/appointments', to: 'appointments#index_carpool'  # Index of appointments in a carpool
