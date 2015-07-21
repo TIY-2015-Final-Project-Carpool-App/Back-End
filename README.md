@@ -38,7 +38,7 @@
   * [User's Pending Invitations Index](#users-pending-invitations-index)
   * [Invite a User to Carpool](#invite-a-user-to-carpool)
   * [Activate an Invitation](#activate-an-invitation)
-  * [Decline an Invitation](#decline-an-invitation)
+  * [Decline an Invitation/Remove User from Carpool](#decline-an-invitationremove-user-from-carpool)
 7. [Appointment Model](#appointment-model)
   * [Carpool Appointment Index](#carpool-appointment-index)
   * [User Appointment Index](#user-appointment-index)
@@ -1998,7 +1998,7 @@ Code | Type | Description
 ]
 ```
 
-#### Decline an Invitation
+#### Decline an Invitation/Remove User from Carpool
 
 Removes an invitation (and user) from a carpool. This route can be used to remove a user from a carpool group as well.
 
