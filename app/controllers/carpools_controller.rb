@@ -1,4 +1,5 @@
 class CarpoolsController < ApplicationController
+  before_action :authenticate_with_token!
 
   def index
     if params[:username]
@@ -36,7 +37,7 @@ class CarpoolsController < ApplicationController
   def show
     @carpool = Carpool.find_by(id: params[:id])
     if @carpool
-      render partial: 'carpool', locals: { carpool: @carpool }, status: :ok
+      render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :ok
     else
       render json: { message: "No carpool found with specified ID." }, status: :bad_request
     end
@@ -47,7 +48,7 @@ class CarpoolsController < ApplicationController
     @carpool = current_user.created_carpools.new(attributes)
     if @carpool.save
       @joined_carpool = current_user.joined_carpools.create(carpool_id: @carpool.id, activated: true)
-      render partial: 'carpool', locals: { carpool: @carpool }, status: :created
+      render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :created
     else
       render json: { errors: @carpool.errors.full_messages }, status: :unprocessable_entity
     end
@@ -56,7 +57,7 @@ class CarpoolsController < ApplicationController
   # Require username if user joining != current_user
   def join
     emails = params[:emails]
-    @carpool = current_user.created_carpools.find(params[:id])
+    @carpool = current_user.created_carpools.find_by!(id: params[:id])
     @carpool = @carpool.join_emails(emails)
     @joined_carpools = @carpool.joined_carpools
 
@@ -68,7 +69,7 @@ class CarpoolsController < ApplicationController
     if @carpool
       attributes = set_attributes(params)
       if @carpool.update(attributes)
-        render partial: 'carpool', locals: { carpool: @carpool }, status: :ok
+        render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :ok
       else
         render json: { errors: @carpool.errors.full_messages }, status: :unprocessable_entity
       end
@@ -84,7 +85,7 @@ class CarpoolsController < ApplicationController
       if @joined_carpool && @joined_carpool.activated == false
         if params[:join_token] == @joined_carpool.join_token
           @joined_carpool.update(activated: true)
-          render partial: 'joined', locals: { joined_carpool: @joined_carpool }, status: :ok
+          render partial: 'joined.json.jbuilder', locals: { joined_carpool: @joined_carpool }, status: :ok
         else  
           render json: { errors: 'Incorrect join_token.' }, status: :bad_request
         end
@@ -117,7 +118,7 @@ class CarpoolsController < ApplicationController
     @joined_carpool = @carpool.joined_carpools.where(user_id: @user.id).first
     if current_user.access_token == @user.access_token || current_user.access_token == @carpool.creator.access_token
       if @joined_carpool.destroy
-        render partial: 'carpool', locals: { carpool: @carpool }, status: :ok
+        render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :ok
       else
         render json: { errors: @joined_carpool.errors.full_messages }, status: :bad_request
       end
