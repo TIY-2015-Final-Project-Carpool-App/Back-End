@@ -57,7 +57,7 @@ class CarpoolsController < ApplicationController
   # Require username if user joining != current_user
   def join
     emails = params[:emails]
-    @carpool = current_user.created_carpools.find(params[:id])
+    @carpool = current_user.created_carpools.find_by!(id: params[:id])
     @carpool = @carpool.join_emails(emails)
     @joined_carpools = @carpool.joined_carpools
 
