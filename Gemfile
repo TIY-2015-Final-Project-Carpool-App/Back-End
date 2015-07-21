@@ -57,6 +57,9 @@ gem 'resque-scheduler'
 # Clockwork scheduler to allow queueing of jobs in the future
 # gem 'clockwork'
 
+# RedisToGo for Heroku background workers
+gem 'redis'
+
 group :development, :test do
 	# Development debugging
 	gem 'pry'

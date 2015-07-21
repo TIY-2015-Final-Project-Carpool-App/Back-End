@@ -205,6 +205,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.1)
   rails_12factor
+  redis
   resque (~> 1.22.0)
   resque-scheduler
   sass-rails (~> 5.0)
