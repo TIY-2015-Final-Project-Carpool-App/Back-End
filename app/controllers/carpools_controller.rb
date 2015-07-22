@@ -1,5 +1,5 @@
 class CarpoolsController < ApplicationController
-  before_action :authenticate_with_token! except: [:activate, :remove_invite]
+  before_action :authenticate_with_token!, except: [:activate, :remove_invite]
 
   def index
     @carpools = Carpool.page(params[:page]).per(params[:per])
@@ -103,11 +103,26 @@ class CarpoolsController < ApplicationController
   end
 
   def remove_invite
-    binding.pry
+    if params[:join_token]
+      email_remove_invite(params)
+    else
+      user_remove_invite(params)
+    end
+  end
+
+  def email_remove_invite(params)
+    @invite = JoinedCarpool.find(param[:id])
+    if params[:join_token] == @invite.join_token
+      @invite.destroy
+    end
+  end
+
+  def user_remove_invite(params)
     @invite = JoinedCarpool.find(params[:id])
     @carpool_creator = @invite.carpool.creator
-    @user = @invite.user
-    if current_user.access_token == @carpool_creator.access_token || current_user.access_token == @user.access_token
+    @user_invite = current_user.joined_carpools.find(params[:id])
+    # if current_user.access_token == @carpool_creator.access_token || current_user.access_token == @user.access_token
+    if @user_invite || current_user.access_token == @carpool_creator.access_token  
       if @invite.destroy
         render json: { message: "Invite removed." }, status: :no_content
       else

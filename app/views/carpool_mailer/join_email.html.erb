@@ -11,12 +11,12 @@
     <br/>  
     <p>
       To accept the invitation:
-      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/user/#{@user.username}/carpool/#{@carpool.id}/activate?join_token=#{@joined.join_token}" %>><%= "Accept" %></a>
+      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/carpool/#{@carpool.id}/activate?join_token=#{@joined.join_token}" %>><%= "Accept" %></a>
     </p>
     <br/>
     <p>
       To decline the invitation:
-      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/user/#{@user.username}/carpool/#{@carpool.id}/decline?join_token=#{@joined.join_token}" %>><%= "Decline" %></a>
+      <a href=<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/invite/#{@joined.id}/decline?join_token=#{@joined.join_token}" %>><%= "Decline" %></a>
     </p>
   </body>
 
