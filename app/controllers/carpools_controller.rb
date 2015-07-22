@@ -1,5 +1,5 @@
 class CarpoolsController < ApplicationController
-  before_action :authenticate_with_token!
+  before_action :authenticate_with_token!, except: [:activate, :remove_invite]
 
   def index
     @carpools = Carpool.page(params[:page]).per(params[:per])
@@ -57,6 +57,23 @@ class CarpoolsController < ApplicationController
   end
 
   def activate
+    if params[:join_token]
+      email_activate(params)
+    else
+      user_activate(params)
+    end
+  end
+
+  def email_activate(params)
+    @invite = Carpool.find(params[:id]).joined_carpools.find_by!(join_token: params[:join_token])
+    if @invite.update(activated: true)
+      render json: { message: "User joined carpool." }, status: :ok
+    else
+      render json: { errors: @invite.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def user_activate(params)
     @carpool = Carpool.find(params[:id])
     @joined_carpool = @carpool.joined_carpools.where(user_id: current_user.id).first
     if @joined_carpool && @joined_carpool.activated == false
@@ -64,7 +81,7 @@ class CarpoolsController < ApplicationController
         @joined_carpool.update(activated: true)
         render partial: 'joined.json.jbuilder', locals: { joined_carpool: @joined_carpool }, status: :ok
       else  
-        render json: { errors: 'Incorrect join_token.' }, status: :bad_request
+        render json: { errors: 'Incorrect join token.' }, status: :unprocessable_entity
       end
     else
       render json: { errors: 'Current logged in user has not joined this carpool, or user is already activated.' },
@@ -94,7 +111,7 @@ class CarpoolsController < ApplicationController
       if @joined_carpool.destroy
         render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :ok
       else
-        render json: { errors: @joined_carpool.errors.full_messages }, status: :bad_request
+        render json: { errors: @joined_carpool.errors.full_messages }, status: :unprocessable_entity
       end
     else
       render json: { message: 'Current user is not authorized to remove this user from specified carpool.' },
@@ -103,15 +120,32 @@ class CarpoolsController < ApplicationController
   end
 
   def remove_invite
-    binding.pry
+    if params[:join_token]
+      email_remove_invite(params)
+    else
+      user_remove_invite(params)
+    end
+  end
+
+  def email_remove_invite(params)
+    @invite = JoinedCarpool.find(params[:id])
+    if @invite.destroy
+      render json: { message: "Invite Removed." }, status: :no_content
+    else
+      render json: { errors: @invite.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def user_remove_invite(params)
     @invite = JoinedCarpool.find(params[:id])
     @carpool_creator = @invite.carpool.creator
-    @user = @invite.user
-    if current_user.access_token == @carpool_creator.access_token || current_user.access_token == @user.access_token
+    @user_invite = current_user.joined_carpools.find(params[:id])
+    # if current_user.access_token == @carpool_creator.access_token || current_user.access_token == @user.access_token
+    if @user_invite || current_user.access_token == @carpool_creator.access_token  
       if @invite.destroy
         render json: { message: "Invite removed." }, status: :no_content
       else
-        render json: { errors: @invite.errors.full_messages }, status: :bad_request
+        render json: { errors: @invite.errors.full_messages }, status: :unprocessable_entity
       end
     else
       render json: { message: "Current user is not authorized to remove this user's invite." },

@@ -1,0 +1,10 @@
+You have been invited to a Carpool <%= @user.first_name %>!
+
+Carpool Name: <%= @carpool.title %>
+Created by: <%= @carpool.creator.email %>
+
+To accept the invitation (copy and paste url into your browser):
+<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/carpool/#{@carpool.id}/activate?join_token=#{@joined.join_token}" %>
+
+To decline the invitation (copy and paste url into your browser):
+<%= "https://fast-eyrie-2498.herokuapp.com/carpoolapp/invite/#{@joined.id}/decline?join_token=#{@joined.join_token}" %>

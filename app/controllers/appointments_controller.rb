@@ -23,7 +23,7 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find(params[:id])
-    render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
+    render partial: 'appointment2.json.jbuilder', locals: { appointment: @appointment }, status: :ok
   end
 
   # Need to add restrictions to creation of appointments to users verified in the group only
@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
     @appointment.carpool_id = @carpool.id
     if @appointment.save
       @rider = current_user.riders.create(appointment_id: @appointment.id, rider_role: "Driver")
-      render partial: 'appointment2', locals: { appointment: @appointment }, status: :created
+      render partial: 'appointment2.json.jbuilder', locals: { appointment: @appointment }, status: :created
     else
       render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class AppointmentsController < ApplicationController
     attributes = set_attributes(params)
     @appointment = current_user.created_appointments.find(params[:id])
     if @appointment.update(attributes)
-      render partial: 'appointment2', locals: { appointment: @appointment }, status: :ok
+      render partial: 'appointment2.json.jbuilder', locals: { appointment: @appointment }, status: :ok
     else
       render json: { errors: @appointment.errors.full_messages }, status: :unprocessable_entity
     end

@@ -7,7 +7,7 @@ class RidersController < ApplicationController
     if current_user.access_token == @user.access_token
       @rider = @user.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
       if @rider.save
-        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+        render partial: 'appointments/appointment2.json.jbuilder', locals: { appointment: @rider.appointment }, 
                status: :created
       else
         render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
@@ -22,7 +22,7 @@ class RidersController < ApplicationController
     @child = current_user.children.find(params[:child_id])
     @rider = @child.riders.new(appointment_id: @appointment.id, rider_role: "Passenger")
     if @rider.save
-      render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+      render partial: 'appointments/appointment2.json.jbuilder', locals: { appointment: @rider.appointment }, 
              status: :created
     else
       render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity
@@ -35,7 +35,7 @@ class RidersController < ApplicationController
     if current_user.access_token == @user.access_token
       @rider = @user.riders.where(appointment_id: @appointment.id).first
       if @rider.update(rider_role: params[:rider_role])
-        render partial: 'appointments/appointment2', locals: { appointment: @rider.appointment }, 
+        render partial: 'appointments/appointment2.json.jbuilder', locals: { appointment: @rider.appointment }, 
                status: :created
       else
         render json: { errors: @rider.errors.full_messages }, status: :unprocessable_entity 
