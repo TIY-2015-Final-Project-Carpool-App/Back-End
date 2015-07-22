@@ -65,7 +65,7 @@ class CarpoolsController < ApplicationController
   end
 
   def email_activate(params)
-    @invite = Carpool.find(params[:id]).find_by!(join_token: params[:join_token])
+    @invite = Carpool.find(params[:id]).joined_carpools.find_by!(join_token: params[:join_token])
     if @invite.update(activated: true)
       render json: { message: "User joined carpool." }, status: :ok
     else
