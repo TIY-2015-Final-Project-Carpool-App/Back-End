@@ -2333,7 +2333,7 @@ description | string | Description of the appointment.
 origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
 destination | string | **Required.** Address of the intended destination.
 distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
-seats | integer | Number of seats available in the driver's vehicle (without including the user).
+seats | integer | **Required.** Number of seats available in the driver's vehicle (without including the user).
 
 **Status Codes**
 
@@ -2425,7 +2425,7 @@ description | string | Description of the appointment.
 origin | string | **Required.** Address of the intended intial pickup location (usually the driver's address).
 destination | string | **Required.** Address of the intended destination.
 distance_filter | integer | **Required.** Distance (in **miles**) the driver is willing to drive per added user. (Will reject any user that attempts to join the appointment but is farther than the input distance.)
-seats | integer | Number of seats available in the driver's vehicle (without including the user).
+seats | integer | **Required.** Number of seats available in the driver's vehicle (without including the user).
 
 **Status Codes**
 
