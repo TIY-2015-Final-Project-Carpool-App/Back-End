@@ -65,8 +65,8 @@ class CarpoolsController < ApplicationController
   end
 
   def email_activate(params)
-    @invite = JoinedCarpool.find(params[:id])
-    if params[:join_token] == @joined_carpool.join_token
+    @invite = Carpool.find(params[:id]).find_by!(join_token: params[:join_token])
+    if @invite.update(activated: true)
       render json: { message: "User joined carpool." }, status: :ok
     else
       render json: { errors: "Incorrect join token." }, status: :bad_request
