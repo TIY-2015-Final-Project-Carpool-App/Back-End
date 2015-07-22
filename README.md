@@ -432,7 +432,6 @@ address | string | **Required.** Child's location to be picked up and dropped of
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).
-blood_type | string | Child's blood type.
 
 **Status Codes**
 
@@ -549,7 +548,6 @@ address | string | **Required.** Child's location to be picked up and dropped of
 phone_number | string | Child's phone number if applicable.
 height | integer | Child's height in inches (in).
 weight | integer | Child's weight in pounds (lb).
-blood_type | string | Child's blood type.
 
 **Status Codes**
 
