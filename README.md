@@ -1919,13 +1919,6 @@ Code | Type | Description
 200 | Success | Server has processed the request and has successfully accepted the invitation.
 422 | Error | Unprocessable Entry. Specified parameters are invalid.
 
-**Example Input**
-
-```
-{
-  "join_token": "cf8e0bfdd05805a11cd030cba9aaf6f1"
-}
-```
 
 **Example Response**
 
