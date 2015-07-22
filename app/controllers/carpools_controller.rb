@@ -69,7 +69,7 @@ class CarpoolsController < ApplicationController
     if @invite.update(activated: true)
       render json: { message: "User joined carpool." }, status: :ok
     else
-      render json: { errors: "Incorrect join token." }, status: :bad_request
+      render json: { errors: @invite.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -81,7 +81,7 @@ class CarpoolsController < ApplicationController
         @joined_carpool.update(activated: true)
         render partial: 'joined.json.jbuilder', locals: { joined_carpool: @joined_carpool }, status: :ok
       else  
-        render json: { errors: 'Incorrect join token.' }, status: :bad_request
+        render json: { errors: 'Incorrect join token.' }, status: :unprocessable_entity
       end
     else
       render json: { errors: 'Current logged in user has not joined this carpool, or user is already activated.' },
@@ -111,7 +111,7 @@ class CarpoolsController < ApplicationController
       if @joined_carpool.destroy
         render partial: 'carpool.json.jbuilder', locals: { carpool: @carpool }, status: :ok
       else
-        render json: { errors: @joined_carpool.errors.full_messages }, status: :bad_request
+        render json: { errors: @joined_carpool.errors.full_messages }, status: :unprocessable_entity
       end
     else
       render json: { message: 'Current user is not authorized to remove this user from specified carpool.' },
