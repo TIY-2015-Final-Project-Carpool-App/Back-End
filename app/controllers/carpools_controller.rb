@@ -57,6 +57,18 @@ class CarpoolsController < ApplicationController
   end
 
   def activate
+    if params[:join_token]
+      email_activate(params)
+    else
+      user_activate(params)
+    end
+  end
+
+  def email_activate(params)
+    
+  end
+
+  def user_activate(params)
     @carpool = Carpool.find(params[:id])
     @joined_carpool = @carpool.joined_carpools.where(user_id: current_user.id).first
     if @joined_carpool && @joined_carpool.activated == false
@@ -111,7 +123,7 @@ class CarpoolsController < ApplicationController
   end
 
   def email_remove_invite(params)
-    @invite = JoinedCarpool.find(param[:id])
+    @invite = JoinedCarpool.find(params[:id])
     if params[:join_token] == @invite.join_token
       @invite.destroy
     end
