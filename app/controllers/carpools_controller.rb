@@ -1,5 +1,5 @@
 class CarpoolsController < ApplicationController
-  before_action :authenticate_with_token!
+  before_action :authenticate_with_token! except: [:activate, :remove_invite]
 
   def index
     @carpools = Carpool.page(params[:page]).per(params[:per])
