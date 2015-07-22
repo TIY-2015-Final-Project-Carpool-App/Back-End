@@ -14,7 +14,6 @@ class Carpool < ActiveRecord::Base
         user = User.find_by!(email: email)
         self.users << user ## This creates a joined_carpool in the database.
         @joined = self.joined_carpools.where(user_id: user.id).first
-        binding.pry
         JoinEmailJob.perform_later(@joined)
       end
     end
